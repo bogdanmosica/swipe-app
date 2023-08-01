@@ -25,15 +25,13 @@ In the root folder run npm install
 npm install
 ```
 
-> ---
 >
-> - ### HINT
+> ### HINT
 >
 > - To enhance your development experience, we highly recommend installing the [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) extension in [Visual Studio Code](https://code.visualstudio.com/) ([VSCode](https://code.visualstudio.com/)).
 > - The [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) is a powerful tool that provides a user-friendly interface to navigate and manage your Nx workspace.
 > - With the [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console), you can efficiently run commands, generate code, analyze dependencies, and access various Nx features.
 >
-> ---
 
 ### To install the Nx Console in VSCode, follow these simple steps:
 
