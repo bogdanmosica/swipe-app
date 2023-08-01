@@ -20,6 +20,10 @@ To execute tasks with Nx use the following syntax:
 nx <target> <project> <...options>
 ```
 
+Tasks:
+
+1. nx run database:module:service --name={args.name} --project={args.project} --directory={args.directory} --module={args.module} --no-interactive
+
 You can also run multiple targets:
 
 ```

@@ -1,0 +1,38 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "importHelpers": true,
+    "sourceMap": true,
+    "declaration": false,
+    "strictPropertyInitialization": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": [
+      "es2020",
+      "dom",
+      "ES2021.String"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@swipe-app/database": [
+        "libs/database/src/index.ts"
+      ],
+      "@swipe-app/swipe-app-api": [
+        "libs/swipe-app-api/src/index.ts"
+      ],
+      "@swipe-app/swipe-utils": [
+        "libs/swipe-utils/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

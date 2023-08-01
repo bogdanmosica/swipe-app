@@ -18,12 +18,41 @@
     }
   },
   "targetDefaults": {
+    "module:service": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx generate @nx/nest:module --name={args.name} --project={args.project} --directory={args.directory} --module={args.module} --no-interactive",
+          "nx generate @nx/nest:service --name={args.name} --project={args.project} --directory={args.directory} --no-interactive"
+        ]
+      }
+    },
     "build": {
       "dependsOn": [
         "^build"
       ],
       "inputs": [
         "production",
+        "^production"
+      ]
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
+    },
+    "e2e": {
+      "inputs": [
+        "default",
         "^production"
       ]
     }
@@ -34,8 +63,27 @@
       "sharedGlobals"
     ],
     "production": [
-      "default"
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/.eslintrc.json"
     ],
     "sharedGlobals": []
+  },
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true
+      },
+      "library": {}
+    },
+    "@nx/next": {
+      "application": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
   }
 }

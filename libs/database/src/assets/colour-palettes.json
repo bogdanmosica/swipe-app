@@ -1,0 +1,26 @@
+[
+    {
+        "primary": "#ffffb7",
+        "secondary": "#fa4c00",
+        "accent": "#073039",
+        "name": "Portafino"
+    },
+    {
+        "primary": "#2e8242",
+        "secondary": "#b0b75c",
+        "accent": "#ffb3e0",
+        "name": "Sea Green"
+    },
+    {
+        "primary": "#211600",
+        "secondary": "#566659",
+        "accent": "#dde0c9",
+        "name": "Sea Green"
+    },
+    {
+        "primary": "#932c57",
+        "secondary": "#d3cf96",
+        "accent": "#ffffe2",
+        "name": "Sea Green"
+    }
+]
