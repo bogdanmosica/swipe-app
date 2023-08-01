@@ -5,38 +5,83 @@ This Nx workspace contains the following applications:
 - Backend application built with Nest.js for server-side functionality.
 - Two front-end applications using Next.js for client-side functionality.
 
+You can check the Nx read me file here: [Nx Workspace](https://github.com/bogdanmosica/swipe-app/nx.README.md)
+<!-- omit in toc -->
 ## Table of Contents
 
-- [Swipe App](#swipeapp)
+- [SwipeApp](#swipeapp)
+  - [Install app](#install-app)
+    - [To install the Nx Console in VSCode, follow these simple steps:](#to-install-the-nx-console-in-vscode-follow-these-simple-steps)
+    - [Commands that can be used](#commands-that-can-be-used)
   - [Installing Postgres and pgAdmin](#installing-postgres-and-pgadmin)
   - [Docker Database Setup](#docker-database-setup)
   - [Running Backend and Frontend Apps](#running-backend-and-frontend-apps)
-- [Nx Workspace](#)
-  - [Generate code](#generate-code)
-  - [Running tasks](#running-tasks)
-  - [Want better Editor Integration?](#want-better-editor-integration)
-  - [Ready to deploy?](#ready-to-deploy)
-  - [Set up CI!](#set-up-ci)
-  - [Connect with us!](#connect-with-us)
+
+## Install app
+
+In the root folder run npm install
+
+```bash
+npm install
+```
+
+> ---
+>
+> - ### HINT
+>
+> - To enhance your development experience, we highly recommend installing the [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) extension in [Visual Studio Code](https://code.visualstudio.com/) ([VSCode](https://code.visualstudio.com/)).
+> - The [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) is a powerful tool that provides a user-friendly interface to navigate and manage your Nx workspace.
+> - With the [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console), you can efficiently run commands, generate code, analyze dependencies, and access various Nx features.
+>
+> ---
+
+### To install the Nx Console in VSCode, follow these simple steps:
+
+1. Open Visual Studio Code.
+2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac).
+3. In the Extensions view, search for `Nx Console` using the search bar.
+Click on the "Install" button next to the `Nx Console` extension by Nrwl.
+4. Once installed, you can access the Nx Console by clicking on the Nx Console icon in the Activity Bar on the side of the window or press `Ctrl+Shift+N` (Windows/Linux) or `Cmd+Shift+N` (Mac).
+<br />
+
+### Commands that can be used
+<!-- omit in toc -->
+### # [`apps/api`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/api)
+
+- api:serve
+
+```bash
+npx nx run api:serve --configuration=development
+```
+
+- database:seed
+  
+```bash
+nx run database:seed:run
+```
+<!-- omit in toc -->
+### # [`apps/web`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/web)
+<!-- omit in toc -->
+### # [`apps/api-dashboard`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/api-dashboard)
 
 ## Installing Postgres and pgAdmin
 
-1. **PostgreSQL Installation**:
+1. __PostgreSQL Installation__:
    - Download and install PostgreSQL from the official website: [PostgreSQL](https://www.postgresql.org/download/)
    - Follow the installation instructions for your operating system.
    - During the installation, set up a superuser password and remember it for future use.
 
-2. **pgAdmin Installation**:
+1. __pgAdmin Installation__:
    - Download and install pgAdmin from the official website: [pgAdmin](https://www.pgadmin.org/download/)
    - Follow the installation instructions for your operating system.
    - Launch pgAdmin after installation and configure it to connect to your PostgreSQL server using the superuser credentials set during the PostgreSQL installation.
 
 ## Docker Database Setup
 
-1. **Docker Installation**:
+1. __Docker Installation__:
    - If you prefer to use Docker to run your database, install Docker from the official website: [Docker](https://www.docker.com/get-started)
 
-2. **Running PostgreSQL with Docker**:
+2. __Running PostgreSQL with Docker__:
    - Once Docker is installed, open your terminal or command prompt.
    - Pull the official PostgreSQL image from Docker Hub:
 
@@ -52,12 +97,12 @@ This Nx workspace contains the following applications:
 
      Replace `<your_password>` with your preferred PostgreSQL password.
 
-3. **Connecting to the Dockerized PostgreSQL**:
+3. __Connecting to the Dockerized PostgreSQL__:
    - You can now use the same credentials to connect to the PostgreSQL database either with pgAdmin or in your Nx applications.
 
 ## Running Backend and Frontend Apps
 
-1. **Backend Application**:
+1. __Backend Application__:
    - Open a terminal or command prompt and navigate to the `apps/backend` directory.
    - Install the backend application's dependencies:
 
@@ -73,7 +118,7 @@ This Nx workspace contains the following applications:
 
    - The backend server will be running on <http://localhost:3000>.
 
-2. **Frontend Applications**:
+2. __Frontend Applications__:
    - Each front-end application has its own directory within the `apps` folder.
    - To run each front-end application, open a terminal or command prompt and navigate to the respective front-end app directory (e.g., `apps/frontend-app1`).
    - Install the front-end application's dependencies:
@@ -90,7 +135,7 @@ This Nx workspace contains the following applications:
 
    - The front-end application will be running on <http://localhost:4000> for app1 and <http://localhost:5000> for app2 (change the port numbers accordingly).
 
-3. **Accessing the Applications**:
+3. __Accessing the Applications__:
    - The backend and front-end applications are now running.
    - You can access the backend API and front-end applications from your browser or API clients like Postman or Insomnia.
 
@@ -101,64 +146,3 @@ This Nx workspace contains the following applications:
 That's it! You have successfully installed PostgreSQL and pgAdmin, set up a Dockerized database, and run the backend and front-end applications in your Nx workspace. Happy coding! 🚀
 
 ---
-# Nx Workspace
-
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
-
-✨ **This workspace has been generated by [Nx, a Smart, fast and extensible build system.](https://nx.dev)** ✨
-
-## Generate code
-
-If you happen to use Nx plugins, you can leverage code generators that might come with it.
-
-Run `nx list` to get a list of available plugins and whether they have generators. Then run `nx list <plugin-name>` to see what generators are available.
-
-Learn more about [Nx generators on the docs](https://nx.dev/plugin-features/use-code-generators).
-
-## Running tasks
-
-To execute tasks with Nx use the following syntax:
-
-```
-nx <target> <project> <...options>
-```
-
-Tasks:
-
-1. nx run database:module:service --name={args.name} --project={args.project} --directory={args.directory} --module={args.module} --no-interactive
-
-You can also run multiple targets:
-
-```
-nx run-many -t <target1> <target2>
-```
-
-..or add `-p` to filter specific projects
-
-```
-nx run-many -t <target1> <target2> -p <proj1> <proj2>
-```
-
-Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/core-features/run-tasks).
-
-## Want better Editor Integration?
-
-Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
-
-## Ready to deploy?
-
-Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
-
-## Set up CI!
-
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
-
-- [Set up remote caching](https://nx.dev/core-features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/core-features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
-
-## Connect with us!
-
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
