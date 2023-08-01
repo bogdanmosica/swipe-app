@@ -59,6 +59,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/typeorm": "^10.0.0",
     "@swc/helpers": "~0.5.0",
+    "@tremor/react": "^3.6.0",
     "axios": "^1.0.0",
     "joi": "^17.9.2",
     "next": "13.4.1",
