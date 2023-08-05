@@ -1,15 +1,23 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import Joi from 'joi';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SwipeAppApiModule } from '@swipe-app/swipe-app-api';
-import Joi from 'joi';
-import { DatabaseModule } from '@swipe-app/database';
-import { SeedModule } from '@swipe-app/database';
+
+import { FavoriteAuthorsModule } from './favorite-authors/favorite-authors.module';
+import { FavoriteQuotesModule } from './favorite-quotes/favorite-quotes.module';
+import { VideoBackgroundsModule } from './video-backgrounds/video-backgrounds.module';
+import { ColourPalettesModule } from './colour-palettes/colour-palettes.module';
+import { DatabaseModule } from './database/database.module';
+import { SeedModule } from './database/seed/seed.module';
 
 @Module({
   imports: [
+    FavoriteAuthorsModule,
+    FavoriteQuotesModule,
+    VideoBackgroundsModule,
+    ColourPalettesModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         DATABASE_HOST: Joi.string().required(),
@@ -21,7 +29,6 @@ import { SeedModule } from '@swipe-app/database';
       }),
     }),
     DatabaseModule,
-    SwipeAppApiModule,
     SeedModule,
   ],
   controllers: [AppController],
