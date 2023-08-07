@@ -59,6 +59,8 @@ nx run database:seed:run
 ```
 <!-- omit in toc -->
 ### # [`apps/web`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/web)
+
+To create a new Next app use `nx g @nx/next:app my-new-app`
 <!-- omit in toc -->
 ### # [`apps/api-dashboard`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/api-dashboard)
 
