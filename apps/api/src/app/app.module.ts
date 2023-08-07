@@ -11,6 +11,7 @@ import { VideoBackgroundsModule } from './video-backgrounds/video-backgrounds.mo
 import { ColourPalettesModule } from './colour-palettes/colour-palettes.module';
 import { DatabaseModule } from './database/database.module';
 import { SeedModule } from './database/seed/seed.module';
+import { AdministrationEntitiesModule } from './administration-entities/administration-entities.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { SeedModule } from './database/seed/seed.module';
     }),
     DatabaseModule,
     SeedModule,
+    AdministrationEntitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
