@@ -65,6 +65,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/typeorm": "^10.0.0",
     "@remotion/cli": "^4.0.18",
+    "@remotion/lambda": "^4.0.18",
     "@remotion/player": "^4.0.18",
     "@remotion/renderer": "^4.0.18",
     "@swc/helpers": "~0.5.0",
