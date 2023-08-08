@@ -1,10 +1,10 @@
 import { AbsoluteFill } from 'remotion';
-import { MyCompProps } from '../types/example-composition';
+import { MyCompProps } from '../../types/example-composition';
 import { Logo } from './Logo';
 import { Subtitle } from './Subtitle';
 import { Title } from './Title';
 
-export const MyComposition = ({
+export const ExampleComposition = ({
   title,
   subtitle,
   backgroundColor,

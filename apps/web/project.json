@@ -38,13 +38,6 @@
         }
       }
     },
-    "remotion:studio": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npx remotion studio apps/web/remotion/index.ts",
-        "color": true
-      }
-    },
     "export": {
       "executor": "@nx/next:export",
       "options": {
