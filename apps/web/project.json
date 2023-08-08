@@ -41,7 +41,7 @@
     "remotion:studio": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx remotion studio -P apps/web/tsconfig.json -r tsconfig-paths/register apps/web/remotion/index.tsx",
+        "command": "npx remotion studio apps/web/remotion/index.ts",
         "color": true
       }
     },
