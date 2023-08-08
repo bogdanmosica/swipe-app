@@ -4,9 +4,9 @@ import './remotion-composition-studio.module.css';
 import { Player } from '@remotion/player';
 import { ComponentType, FunctionComponent, useEffect, useState } from 'react';
 // import { useLambda } from '../hooks/useLambda';
-import { defaultMyCompProps } from './types/example-composition';
-import { MyComposition } from './compositions/example/Composition';
-import { ExampleComposition } from './compositions/example-composition/Composition';
+import { defaultMyCompProps } from '../../types/example-composition';
+import { MyComposition } from '../../compositions/example/Composition';
+import { ExampleComposition } from '../../compositions/example-composition/Composition';
 
 /* eslint-disable-next-line */
 export interface RemotionCompositionStudioProps {}

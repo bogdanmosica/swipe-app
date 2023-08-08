@@ -9,7 +9,8 @@
     "start:api:dev": "npx nx run api:serve --configuration=development",
     "start:api-dashboard:dev": "npx nx run api-dashboard:serve --configuration=development",
     "start:web:dev": "npx nx run web:serve --configuration=development",
-    "remotion:studio": "npx remotion studio -P apps/web/tsconfig.json --config=apps/web/remotion.config.ts --log=verbose"
+    "remotion:studio": "npx remotion studio -P apps/web/tsconfig.json --config=apps/web/remotion.config.ts --log=verbose",
+    "dep-graph": "nx dep-graph"
   },
   "private": true,
   "devDependencies": {
