@@ -1,0 +1,27 @@
+{
+  "name": "remotion-composition-studio",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/remotion-composition-studio/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "remotion:studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx remotion studio libs/remotion-composition-studio/src/lib/index.ts",
+        "color": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/remotion-composition-studio/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  }
+}

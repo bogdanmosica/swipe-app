@@ -15,7 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@swipe-app/remotion-composition-studio": [
+        "libs/remotion-composition-studio/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -60,7 +60,11 @@ nx run database:seed:run
 <!-- omit in toc -->
 ### # [`apps/web`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/web)
 
-To create a new Next app use `nx g @nx/next:app my-new-app`
+- To run web app use command `npx nx run web:serve --configuration=development`
+- To run remotion studio use command `npx nx run web:remotion:studio`
+- To create a new Next app use `nx g @nx/next:app my-new-app`
+- To run remotion studio from libs folder use command `npx nx run remotion-composition-studio:remotion:studio`
+
 <!-- omit in toc -->
 ### # [`apps/api-dashboard`](https://github.com/bogdanmosica/swipe-app/tree/master/apps/api-dashboard)
 
