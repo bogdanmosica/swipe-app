@@ -7,6 +7,7 @@ import {
 import { ExampleComposition } from './compositions/example-composition/Composition';
 import './style.css';
 import { defaultMyCompProps } from './types/example-composition';
+import { AuthorQuoteComposition } from './compositions/author-quotes/Composition';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -32,6 +33,15 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1280}
         height={720}
+        defaultProps={defaultMyCompProps}
+      />
+      <Composition
+        id="QuotesAuthor"
+        component={AuthorQuoteComposition}
+        durationInFrames={140}
+        fps={30}
+        width={1080}
+        height={1920}
         defaultProps={defaultMyCompProps}
       />
     </>

@@ -28,7 +28,8 @@
     "**/*.jsx",
     "../../apps/web/.next/types/**/*.ts",
     "../../dist/apps/web/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "../../libs/shared-ui/src/lib/accordion.tsx"
   ],
   "exclude": [
     "node_modules",

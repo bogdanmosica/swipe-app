@@ -44,3 +44,5 @@ Thumbs.db
 # env Files
 /apps/api/.env
 /apps/api/.env.local
+/apps/web/.env
+/apps/web/.env.local
