@@ -16,9 +16,9 @@ export function HomeFeatureItem({
   const Icon = icon;
   return (
     <div className="relative overflow-hidden rounded-lg border bg-background p-2">
-      <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+      <div className="flex h-[200px] flex-col justify-between rounded-md p-6">
         <div className="space-y-2">
-          <Icon />
+          <Icon className="text-3xl" />
           <h3 className="font-bold">{title}</h3>
           <p className="text-sm text-muted-foreground">{description}</p>
         </div>

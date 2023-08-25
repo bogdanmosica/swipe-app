@@ -1,13 +1,13 @@
 import { SiteConfig } from '../types';
 
 export const siteConfig: SiteConfig = {
-  name: 'Taxonomy',
+  name: 'Swipe',
   description:
-    'An open source application built using the new router, server components and everything new in Next.js 13.',
-  url: 'https://tx.shadcn.com',
-  ogImage: 'https://tx.shadcn.com/og.jpg',
+    'Swipe is a revolutionary video editor app that takes the hassle out of video creation and lets you unleash your creativity effortlessly.',
+  url: 'https://www.bogdanmosica.ro',
+  ogImage: 'https://www.bogdanmosica.ro/og.jpg',
   links: {
-    twitter: 'https://twitter.com/shadcn',
-    github: 'https://github.com/shadcn/taxonomy',
+    twitter: 'https://twitter.com/Bmosica',
+    github: 'https://github.com/bogdanmosica',
   },
 };

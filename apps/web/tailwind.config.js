@@ -1,5 +1,6 @@
 const { join } = require('path');
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -107,6 +108,10 @@ module.exports = {
         'text-change': 'text-change 8s infinite',
         'text-up': 'text-up 1s infinite',
         'text-down': 'text-down 1s infinite',
+      },
+      fontFamily: {
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+        heading: ['var(--font-heading)', ...fontFamily.sans],
       },
     },
   },

@@ -32,6 +32,7 @@ import {
   FaRegFileAudio,
   FaClapperboard,
   FaHatWizard,
+  FaCircleChevronRight,
 } from 'react-icons/fa6';
 
 export type Icon = LucideIcon;
@@ -48,6 +49,7 @@ export const Icons = {
   spinner: Loader2,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
+  circleChevronRight: FaCircleChevronRight,
   trash: Trash,
   post: FileText,
   page: File,
