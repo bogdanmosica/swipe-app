@@ -7,6 +7,10 @@ import { ColourPalettesSeedModule } from './colour-palettes-seed/colour-palettes
 import { FavoriteAuthorsSeedModule } from './favorite-authors-seed/favorite-authors-seed.module';
 import { FavoriteQuotesSeedModule } from './favorite-quotes-seed/favorite-quotes-seed.module';
 import { VideoBackgroundsSeedModule } from './video-backgrounds-seed/video-backgrounds-seed.module';
+import { FavoriteQuote } from '../../favorite-quotes/entities/favorite-quote.entity';
+import { FavoriteAuthor } from '../../favorite-authors/entities/favorite-author.entity';
+import { VideoBackground } from '../../video-backgrounds/entities/video-background.entity';
+import { ColourPalette } from '../../colour-palettes/entities/colour-palette.entity';
 
 @Module({
   imports: [
@@ -34,7 +38,12 @@ import { VideoBackgroundsSeedModule } from './video-backgrounds-seed/video-backg
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [__dirname + '/../../**/*.entity.{js,ts}'],
+        entities: [
+          FavoriteQuote,
+          FavoriteAuthor,
+          VideoBackground,
+          ColourPalette,
+        ],
         synchronize: true,
       }),
     }),
