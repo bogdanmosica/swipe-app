@@ -6,7 +6,7 @@ import { FavoriteQuotesSeedService } from './favorite-quotes-seed/favorite-quote
 import { VideoBackgroundsSeedService } from './video-backgrounds-seed/video-backgrounds-seed.service';
 import { ColourPalettesSeedService } from './colour-palettes-seed/colour-palettes-seed.service';
 
-const runSeed = async () => {
+export const runSeed = async () => {
   const app = await NestFactory.create(SeedModule);
 
   // run
