@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { readFileSync } from 'fs';
 import { FavoriteAuthor } from '../../../favorite-authors/entities/favorite-author.entity';
+import path from 'path';
 
 @Injectable()
 export class FavoriteAuthorsSeedService {
@@ -21,7 +22,7 @@ export class FavoriteAuthorsSeedService {
     const countQuotesAuthors = await this.repository.count();
     if (!countQuotesAuthors) {
       const file = readFileSync(
-        `${__dirname}/../../../../assets/author-famous-quotes.json`,
+        path.join(__dirname, 'assets/author-famous-quotes.json'),
         'utf8'
       );
       const data = JSON.parse(file);

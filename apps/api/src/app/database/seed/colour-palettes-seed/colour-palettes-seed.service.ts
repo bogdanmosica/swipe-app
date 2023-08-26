@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
 import { NameThatColor } from '../../../utils/name-that-color/name-that-color';
 import { ColourPalette } from '../../../colour-palettes/entities/colour-palette.entity';
+import path from 'path';
 
 @Injectable()
 export class ColourPalettesSeedService {
@@ -19,7 +20,7 @@ export class ColourPalettesSeedService {
         "Colour Palette: Colour Palette data does not exist, I'll create some data for you, from backgrounds.json!"
       );
       const file = readFileSync(
-        `${__dirname}/../../../../assets/colour-palettes.json`,
+        path.join(__dirname, 'assets/colour-palettes.json'),
         'utf8'
       );
       let colours = JSON.parse(file);

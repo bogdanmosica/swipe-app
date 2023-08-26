@@ -1,10 +1,14 @@
 import { readFileSync } from 'fs';
 
 import { IColorName } from '../interfaces/color-names.interface';
+import path from 'path';
 
 export class NameThatColor {
   constructor() {
-    const file = readFileSync(`${__dirname}/color-names.json`, 'utf8');
+    const file = readFileSync(
+      path.join(__dirname, 'assets/colour-names.json'),
+      'utf8'
+    );
     if (file) {
       this.colorsData = JSON.parse(file).map((color: [][]) => {
         const colorString = `#${color[0]}`;
@@ -19,7 +23,9 @@ export class NameThatColor {
         } as IColorName;
       });
     } else {
-      console.error('You need a ./color-names.json file in the same directory');
+      console.error(
+        'You need a ./colour-names.json file in the same directory'
+      );
     }
   }
 

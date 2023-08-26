@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { FavoriteQuote } from '../../../favorite-quotes/entities/favorite-quote.entity';
 import { FavoriteAuthorsService } from '../../../favorite-authors/favorite-authors.service';
 import { FavoriteAuthor } from '../../../favorite-authors/entities/favorite-author.entity';
+import path from 'path';
 
 @Injectable()
 export class FavoriteQuotesSeedService {
@@ -21,7 +22,7 @@ export class FavoriteQuotesSeedService {
         "FavoriteQuotes: Favorite Quotes data does not exist, I'll create some data for you!"
       );
       const file = readFileSync(
-        `${__dirname}/../../../../assets/author-famous-quotes.json`,
+        path.join(__dirname, 'assets/author-famous-quotes.json'),
         'utf8'
       );
 

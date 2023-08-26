@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
 
 import { VideoBackground } from '../../../video-backgrounds/entities/video-background.entity';
+import path from 'path';
 
 @Injectable()
 export class VideoBackgroundsSeedService {
@@ -19,7 +20,7 @@ export class VideoBackgroundsSeedService {
         "Video Background: Video Background data does not exist, I'll create some data for you, from VideoBackground.json!"
       );
       const file = readFileSync(
-        `${__dirname}/../../../../assets/backgrounds.json`,
+        path.join(__dirname, 'assets/backgrounds.json'),
         'utf8'
       );
       const data = JSON.parse(file);
