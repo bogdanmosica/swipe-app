@@ -11,8 +11,12 @@ import { FavoriteAuthorsService } from './favorite-authors.service';
 import { CreateFavoriteAuthorDto } from './dto/create-favorite-author.dto';
 import { UpdateFavoriteAuthorDto } from './dto/update-favorite-author.dto';
 import { FavoriteAuthor } from './entities/favorite-author.entity';
-
-@Controller('favorite-authors')
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Favorite Authors')
+@Controller({
+  path: 'favorite-authors',
+  version: '1',
+})
 export class FavoriteAuthorsController {
   constructor(
     private readonly favoriteAuthorsService: FavoriteAuthorsService

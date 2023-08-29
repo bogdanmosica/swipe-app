@@ -42,8 +42,12 @@ export class FavoriteQuotesService {
     });
   }
 
-  findOneByName(author: FavoriteAuthor) {
-    return this.repository.findOneBy({ author });
+  findOneByName(
+    author: EntityCondition<FavoriteAuthor>
+  ): Promise<NullableType<FavoriteQuote>> {
+    return this.repository.findOne({
+      where: author,
+    });
   }
 
   update(id: number, updateFavoriteQuoteDto: UpdateFavoriteQuoteDto) {

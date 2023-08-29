@@ -8,24 +8,27 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { cn } from '../lib/utils';
-import { userAuthSchema } from '../lib/validations/auth';
+import { loginUserAuthSchema } from '../lib/validations/auth';
 import { buttonVariants } from '@swipe-app/shared-ui';
 import { Input } from '@swipe-app/shared-ui';
 import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
-import { Icons } from '../components/icons';
+import { Icons } from './icons';
 
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
+type RegisterUserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-type FormData = z.infer<typeof userAuthSchema>;
+type FormData = z.infer<typeof loginUserAuthSchema>;
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function LoginUserAuthForm({
+  className,
+  ...props
+}: RegisterUserAuthFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(userAuthSchema),
+    resolver: zodResolver(loginUserAuthSchema),
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
@@ -77,6 +80,24 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             {errors?.email && (
               <p className="px-1 text-xs text-red-600">
                 {errors.email.message}
+              </p>
+            )}
+            <Label className="sr-only" htmlFor="password">
+              Password
+            </Label>
+            <Input
+              id="password"
+              placeholder=""
+              type="password"
+              autoCapitalize="none"
+              autoComplete="password"
+              autoCorrect="off"
+              disabled={isLoading || isGitHubLoading}
+              {...register('password')}
+            />
+            {errors?.password && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.password.message}
               </p>
             )}
           </div>

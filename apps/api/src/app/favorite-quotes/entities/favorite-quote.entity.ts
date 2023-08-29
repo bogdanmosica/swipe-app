@@ -1,8 +1,9 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { FavoriteAuthor } from '../../favorite-authors/entities/favorite-author.entity';
+import { EntityHelper } from '../../utils/entity-helper';
 
 @Entity()
-export class FavoriteQuote {
+export class FavoriteQuote extends EntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -10,8 +10,13 @@ import {
 import { AdministrationEntitiesService } from './administration-entities.service';
 import { CreateAdministrationEntityDto } from './dto/create-administration-entity.dto';
 import { UpdateAdministrationEntityDto } from './dto/update-administration-entity.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('administration-entities')
+@ApiTags('Administration Entities')
+@Controller({
+  path: 'administration-entities',
+  version: '1',
+})
 export class AdministrationEntitiesController {
   constructor(
     private readonly administrationEntitiesService: AdministrationEntitiesService

@@ -11,7 +11,13 @@ import { VideoBackgroundsService } from './video-backgrounds.service';
 import { CreateVideoBackgroundDto } from './dto/create-video-background.dto';
 import { UpdateVideoBackgroundDto } from './dto/update-video-background.dto';
 import { VideoBackground } from './entities/video-background.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Video Backgrounds')
+@Controller({
+  path: 'video-backgrounds',
+  version: '1',
+})
 @Controller('video-backgrounds')
 export class VideoBackgroundsController {
   constructor(

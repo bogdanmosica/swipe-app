@@ -11,8 +11,13 @@ import { ColourPalettesService } from './colour-palettes.service';
 import { CreateColourPaletteDto } from './dto/create-colour-palette.dto';
 import { UpdateColourPaletteDto } from './dto/update-colour-palette.dto';
 import { ColourPalette } from './entities/colour-palette.entity';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('colour-palettes')
+@ApiTags('Colour Palettes')
+@Controller({
+  path: 'colour-palettes',
+  version: '1',
+})
 export class ColourPalettesController {
   constructor(private readonly colourPalettesService: ColourPalettesService) {}
 

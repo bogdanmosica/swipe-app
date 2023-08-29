@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { cn, buttonVariants } from '@swipe-app/shared-ui';
 import { Icons } from '../../../components/icons';
-import { UserAuthForm } from '../../../components/user-auth-form';
+import { LoginUserAuthForm } from '../../../components/login-user-auth-form';
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -35,7 +35,7 @@ export default function LoginPage() {
             Enter your email to sign in to your account
           </p>
         </div>
-        <UserAuthForm />
+        <LoginUserAuthForm />
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
             href="/register"

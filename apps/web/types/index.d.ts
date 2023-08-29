@@ -82,3 +82,5 @@ export type UserSubscriptionPlan = SubscriptionPlan &
     stripeCurrentPeriodEnd: number;
     isPro: boolean;
   };
+
+export type UserSignInSocial = 'email' | 'github' | 'google' | 'facebook';

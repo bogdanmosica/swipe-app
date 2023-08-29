@@ -11,7 +11,13 @@ import { FavoriteQuotesService } from './favorite-quotes.service';
 import { CreateFavoriteQuoteDto } from './dto/create-favorite-quote.dto';
 import { UpdateFavoriteQuoteDto } from './dto/update-favorite-quote.dto';
 import { FavoriteQuote } from './entities/favorite-quote.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Favorite Quotes')
+@Controller({
+  path: 'favorite-quotes',
+  version: '1',
+})
 @Controller('favorite-quotes')
 export class FavoriteQuotesController {
   constructor(private readonly favoriteQuotesService: FavoriteQuotesService) {}

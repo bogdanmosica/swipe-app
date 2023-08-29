@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { EntityHelper } from '../../utils/entity-helper';
 
 @Entity()
-export class ColourPalette {
+export class ColourPalette extends EntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
 

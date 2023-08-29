@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { cn, buttonVariants } from '@swipe-app/shared-ui';
 import { Icons } from '../../../components/icons';
-import { UserAuthForm } from '../../../components/user-auth-form';
+import { RegisterUserAuthForm } from '../../../components/register-user-auth-form';
 
 export const metadata = {
   title: 'Create an account',
@@ -21,11 +21,13 @@ export default function RegisterPage() {
       >
         Login
       </Link>
-      <div className="hidden h-full bg-muted lg:block" />
+      <div className="hidden h-full bg-muted lg:block">
+        <Icons.circleChevronRight className="mx-auto h-full w-1/2" />
+      </div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <Icons.logo className="mx-auto h-6 w-6" />
+            <Icons.circleChevronRight className="mx-auto h-6 w-6" />
             <h1 className="text-2xl font-semibold tracking-tight">
               Create an account
             </h1>
@@ -33,7 +35,7 @@ export default function RegisterPage() {
               Enter your email below to create your account
             </p>
           </div>
-          <UserAuthForm />
+          <RegisterUserAuthForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{' '}
             <Link
