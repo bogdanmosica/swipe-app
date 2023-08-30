@@ -53,8 +53,8 @@ export default registerAs<AppConfig>('app', () => {
   validateConfig(process.env, EnvironmentVariablesValidator);
 
   return {
-    nodeEnv: process.env.NODE_ENV || 'development',
-    name: process.env.APP_NAME || 'app',
+    nodeEnv: process.env.NODE_ENV || Environment.Development,
+    name: process.env.APP_NAME || 'swipe-app-api',
     workingDirectory: process.env.PWD || process.cwd(),
     frontendDomain: process.env.FRONTEND_DOMAIN ?? 'http://localhost:4200',
     backendDomain: process.env.BACKEND_DOMAIN ?? 'http://localhost',

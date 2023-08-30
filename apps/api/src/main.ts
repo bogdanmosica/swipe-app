@@ -13,12 +13,14 @@ import { AllConfigType } from './app/config/config.type';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { SeedService } from './app/database/seed/seed.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
   });
-  void runSeed();
+  //void runSeed();
+  app.get(SeedService).runSeed();
 
   const configService = app.get(ConfigService<AllConfigType>);
 

@@ -34,9 +34,7 @@ import twitterConfig from './config/twitter.config';
 import appleConfig from './config/apple.config';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { AllConfigType } from './config/config.type';
-import { AppDataSource } from './database/data-source';
 import { MailerModule } from './mailer/mailer.module';
-import { Role } from './roles/entities/role.entity';
 
 @Module({
   imports: [
@@ -104,7 +102,7 @@ import { Role } from './roles/entities/role.entity';
     ForgotModule,
     SessionModule,
     MailerModule,
-    // SeedModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
