@@ -19,8 +19,19 @@ type SignUpParamsType = {
   password: string;
 };
 
-export function signIn(signInType: UserSignInSocial, params: SignUpParamsType) {
+type SignInParamsType = {
+  email: string;
+  password: string;
+};
+
+export function signIn(signInType: UserSignInSocial, params: SignInParamsType) {
   const { email, password } = params;
+  const userData: FetchedUserDataType = {
+    ok: false,
+    data: null,
+    error: null,
+  };
+
   const signInObj = {
     email: () =>
       axios.post(`${SWIPE_API_URL}/auth/email/login`, { email, password }),
@@ -40,15 +51,18 @@ export function signIn(signInType: UserSignInSocial, params: SignUpParamsType) {
         password,
       }),
   };
-  let userData;
-  const fetchData = signInObj[signInType]();
-  if (fetchData) {
-    fetchData.then((response) => {
-      userData = response;
-      console.log(response);
+
+  const signInObjPromise = signInObj[signInType]();
+  return signInObjPromise
+    .then((response) => {
+      userData.ok = true;
+      userData.data = response;
+      return userData;
+    })
+    .catch((error) => {
+      userData.error = error?.response?.data;
+      return userData;
     });
-  }
-  return userData || signInObj.email;
 }
 
 export async function signUp(

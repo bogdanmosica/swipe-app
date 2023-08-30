@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -14,6 +13,7 @@ import { Input } from '@swipe-app/shared-ui';
 import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
 import { Icons } from './icons';
+import { signIn } from '../lib/session';
 
 type RegisterUserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -39,12 +39,11 @@ export function LoginUserAuthForm({
 
     const signInResult = await signIn('email', {
       email: data.email.toLowerCase(),
-      redirect: false,
-      callbackUrl: searchParams?.get('from') || '/dashboard',
+      password: data.password,
     });
 
     setIsLoading(false);
-
+    console.log({ signInResult });
     if (!signInResult?.ok) {
       return toast({
         title: 'Something went wrong.',
@@ -54,8 +53,8 @@ export function LoginUserAuthForm({
     }
 
     return toast({
-      title: 'Check your email',
-      description: 'We sent you a login link. Be sure to check your spam too.',
+      title: 'Succes',
+      description: 'You successfully logged in.',
     });
   }
 
@@ -124,7 +123,7 @@ export function LoginUserAuthForm({
         className={cn(buttonVariants({ variant: 'outline' }))}
         onClick={() => {
           setIsGitHubLoading(true);
-          signIn('github');
+          //signIn('github', {});
         }}
         disabled={isLoading || isGitHubLoading}
       >

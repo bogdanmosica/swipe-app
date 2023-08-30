@@ -1,11 +1,4 @@
-import {
-  CreateDateColumn,
-  Entity,
-  Index,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  DeleteDateColumn,
-} from 'typeorm';
+import { Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { EntityHelper } from '../../utils/entity-helper';
 
@@ -19,10 +12,4 @@ export class Session extends EntityHelper {
   })
   @Index()
   user: User;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @DeleteDateColumn()
-  deletedAt: Date;
 }

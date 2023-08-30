@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { genSalt, hash } from 'bcryptjs';
@@ -18,6 +19,7 @@ import { AuthProvidersEnum } from '../../utils/enums/auth-providers.enum';
 import { Role } from '../../roles/entities/role.entity';
 import { Status } from '../../statuses/entities/status.entity';
 import { FileEntity } from '../../files/entities/file.entity';
+import { Session } from '../../session/entities/session.entity';
 
 @Entity()
 export class User extends EntityHelper {
