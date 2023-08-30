@@ -6,7 +6,9 @@
     "*.css"
   ],
   "scripts": {
+    "build:api:dev": "npx nx run api:build --configuration=development",
     "start:api:dev": "npx nx run api:serve --configuration=development",
+    "build:api:prod": "npx nx run api:build --configuration=production",
     "start:api:prod": "npx nx run api:serve --configuration=production",
     "start:api-dashboard:dev": "npx nx run api-dashboard:serve --configuration=development",
     "start:web:dev": "npx nx run web:serve --configuration=development",
