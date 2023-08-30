@@ -36,8 +36,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-
-  app.useStaticAssets(join(__dirname, '..', 'assets'));
+  //app.useStaticAssets(join(__dirname, '..', 'assets'));
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
