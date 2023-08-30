@@ -47,6 +47,15 @@ export class MailService {
         url: `${this.configService.get('app.frontendDomain', {
           infer: true,
         })}/confirm-email/${mailData.data.hash}`,
+        urlContact: `${this.configService.get('app.frontendDomain', {
+          infer: true,
+        })}/contact`,
+        urlTerms: `${this.configService.get('app.frontendDomain', {
+          infer: true,
+        })}/terms-conditions`,
+        urlPrivacy: `${this.configService.get('app.frontendDomain', {
+          infer: true,
+        })}/privacy-policy`,
         actionTitle: emailConfirmTitle,
         app_name: this.configService.get('app.name', { infer: true }),
         text1,
