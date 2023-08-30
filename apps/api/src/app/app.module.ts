@@ -67,7 +67,7 @@ import { Role } from './roles/entities/role.entity';
           infer: true,
         }),
         loaderOptions: {
-          path: path.join('dist/apps/api/app/i18n'),
+          path: path.join(__dirname + '/assets/i18n'),
           watch: true,
         },
       }),

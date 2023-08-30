@@ -11,9 +11,13 @@ import { runSeed } from './app/database/seed/run-seed';
 import { ConfigService } from '@nestjs/config';
 import { AllConfigType } from './app/config/config.type';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
   void runSeed();
 
   const configService = app.get(ConfigService<AllConfigType>);
@@ -30,6 +34,8 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
+
+  app.useStaticAssets(join(__dirname, '..', 'assets'));
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);

@@ -26,8 +26,8 @@
         "tsConfig": "apps/api/tsconfig.app.json",
         "assets": [
           "apps/api/src/assets",
-          "apps/api/src/app/mail/mail-templates",
-          "apps/api/src/app/i18n"
+          "apps/api/src/assets/mail-templates",
+          "apps/api/src/assets/i18n"
         ],
         "isolatedConfig": true,
         "webpackConfig": "apps/api/webpack.config.js"

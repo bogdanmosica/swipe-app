@@ -37,11 +37,8 @@ export class MailService {
         infer: true,
       })}/confirm-email/${mailData.data.hash} ${emailConfirmTitle}`,
       templatePath: path.join(
-        'dist',
-        'apps',
-        'api',
-        'app',
-        'mail',
+        __dirname,
+        'assets',
         'mail-templates',
         'activation.hbs'
       ),
@@ -84,11 +81,8 @@ export class MailService {
         infer: true,
       })}/password-change/${mailData.data.hash} ${resetPasswordTitle}`,
       templatePath: path.join(
-        this.configService.getOrThrow('app.workingDirectory', {
-          infer: true,
-        }),
-        'src',
-        'mail',
+        __dirname,
+        'assets',
         'mail-templates',
         'reset-password.hbs'
       ),
