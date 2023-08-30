@@ -74,7 +74,6 @@ class EnvironmentVariablesValidator {
 }
 
 export default registerAs<DatabaseConfig>('database', () => {
-  //console.log(process.env.DATABASE_TYPE);
   validateConfig(process.env, EnvironmentVariablesValidator);
   return {
     url: process.env.DATABASE_URL,
