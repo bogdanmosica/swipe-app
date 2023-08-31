@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { Role } from '../roles/entities/role.entity';
+import path from 'path';
 
 export const AppDataSource = new DataSource({
   type: process.env.DATABASE_TYPE,
@@ -16,13 +16,16 @@ export const AppDataSource = new DataSource({
   dropSchema: false,
   keepConnectionAlive: true,
   logging: process.env.NODE_ENV !== 'production',
-  entities: [__dirname + '/../**/*.entity{.ts,.js}', Role],
-  // migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-  // cli: {
-  //   entitiesDir: 'src',
-  //   migrationsDir: 'src/database/migrations',
-  //   subscribersDir: 'subscriber',
-  // },
+  entities: [path.join(__dirname, '..', '**/*.entity{.ts,.js}')],
+  autoLoadEntities: true,
+  migrations: [
+    path.join(__dirname, '..', '..', 'assets', 'migrations/**/*{.ts,.js}'),
+  ],
+  cli: {
+    entitiesDir: 'src',
+    migrationsDir: 'src/database/migrations',
+    subscribersDir: 'subscriber',
+  },
   extra: {
     // based on https://node-postgres.com/api/pool
     // max connection pool size

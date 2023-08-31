@@ -19,7 +19,6 @@ import { AuthProvidersEnum } from '../../utils/enums/auth-providers.enum';
 import { Role } from '../../roles/entities/role.entity';
 import { Status } from '../../statuses/entities/status.entity';
 import { FileEntity } from '../../files/entities/file.entity';
-import { Session } from '../../session/entities/session.entity';
 
 @Entity()
 export class User extends EntityHelper {
@@ -29,7 +28,7 @@ export class User extends EntityHelper {
   // For "string | null" we need to use String type.
   // More info: https://github.com/typeorm/typeorm/issues/2567
   @Column({ type: String, unique: true, nullable: true })
-  @Expose({ groups: ['me', 'admin'] })
+  @Expose({ groups: ['me', 'admin', 'super'] })
   email: string | null;
 
   @Column({ nullable: true })

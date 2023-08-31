@@ -18,8 +18,8 @@ import { SeedService } from './app/database/seed/seed.service';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
+    snapshot: true,
   });
-  //void runSeed();
   app.get(SeedService).runSeed();
 
   const configService = app.get(ConfigService<AllConfigType>);

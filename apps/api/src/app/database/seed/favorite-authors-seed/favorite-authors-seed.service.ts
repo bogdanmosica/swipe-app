@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { readFileSync } from 'fs';
@@ -27,7 +27,7 @@ export class FavoriteAuthorsSeedService {
       );
       const data = JSON.parse(file);
 
-      console.log(
+      Logger.log(
         "FavoriteAuthor: Favorite Author data does not exist, I'll create some data for you!"
       );
 
@@ -36,7 +36,7 @@ export class FavoriteAuthorsSeedService {
       );
       await this.repository.insert(authors);
 
-      console.log('FavoriteAuthor: Favorite Author data added!');
+      Logger.log('FavoriteAuthor: Favorite Author data added!');
     }
   }
 }

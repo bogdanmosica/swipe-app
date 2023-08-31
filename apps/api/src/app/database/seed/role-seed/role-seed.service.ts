@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from '../../../roles/entities/role.entity';
 import { RoleEnum } from '../../../roles/roles.enum';
@@ -12,34 +12,24 @@ export class RoleSeedService {
   ) {}
 
   async run() {
-    const countUser = await this.repository.count({
-      where: {
-        id: RoleEnum.user,
-      },
-    });
-
-    if (!countUser) {
-      await this.repository.save(
-        this.repository.create({
-          id: RoleEnum.user,
-          name: 'User',
-        })
-      );
-    }
-
     const countSuper = await this.repository.count({
       where: {
-        id: RoleEnum.user,
+        id: RoleEnum.super,
       },
     });
 
     if (!countSuper) {
+      Logger.log(
+        "Super Role Seed: Super roles does not exist, I'll create some data for you"
+      );
       await this.repository.save(
         this.repository.create({
           id: RoleEnum.super,
           name: 'Super',
         })
       );
+
+      Logger.log('Super Role Seed: Super role added!');
     }
 
     const countAdmin = await this.repository.count({
@@ -49,12 +39,36 @@ export class RoleSeedService {
     });
 
     if (!countAdmin) {
+      Logger.log(
+        "Admin Role Seed: Admin role does not exist, I'll create some data for you"
+      );
       await this.repository.save(
         this.repository.create({
           id: RoleEnum.admin,
           name: 'Admin',
         })
       );
+      Logger.log('Admin Role Seed: Admin role added!');
+    }
+
+    const countUser = await this.repository.count({
+      where: {
+        id: RoleEnum.user,
+      },
+    });
+
+    if (!countUser) {
+      Logger.log(
+        "User Role Seed: User role does not exist, I'll create some data for you"
+      );
+      await this.repository.save(
+        this.repository.create({
+          id: RoleEnum.user,
+          name: 'User',
+        })
+      );
+
+      Logger.log('User Role Seed: User role added!');
     }
   }
 }

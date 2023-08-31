@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
@@ -16,7 +16,7 @@ export class ColourPalettesSeedService {
   async run() {
     const countColourPalette = await this.repository.count();
     if (!countColourPalette) {
-      console.log(
+      Logger.log(
         "Colour Palette: Colour Palette data does not exist, I'll create some data for you, from backgrounds.json!"
       );
       const file = readFileSync(
@@ -44,7 +44,7 @@ export class ColourPalettesSeedService {
 
       await this.repository.insert(colours);
 
-      console.log('Colour Palette: Colour Palette data added!');
+      Logger.log('Colour Palette: Colour Palette data added!');
     }
   }
 }

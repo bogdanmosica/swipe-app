@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
@@ -16,7 +16,7 @@ export class VideoBackgroundsSeedService {
   async run() {
     const countBackgrounds = await this.repository.count();
     if (!countBackgrounds) {
-      console.log(
+      Logger.log(
         "Video Background: Video Background data does not exist, I'll create some data for you, from VideoBackground.json!"
       );
       const file = readFileSync(
@@ -27,7 +27,7 @@ export class VideoBackgroundsSeedService {
 
       await this.repository.insert(data);
 
-      console.log('Video Background: Video Background data added!');
+      Logger.log('Video Background: Video Background data added!');
     }
   }
 }

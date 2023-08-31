@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { AllConfigType } from '../config/config.type';
+import { Role } from '../roles/entities/role.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -19,16 +20,17 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       synchronize: this.configService.get('database.synchronize', {
         infer: true,
       }),
+      autoLoadEntities: true,
       dropSchema: false,
       keepConnectionAlive: true,
       logging:
         this.configService.get('app.nodeEnv', { infer: true }) !== 'production',
-      //migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-      // cli: {
-      //   entitiesDir: 'src',
-      //   migrationsDir: 'src/database/migrations',
-      //   subscribersDir: 'subscriber',
-      // },
+      migrations: [__dirname, '..', '..', 'assets', 'migrations/**/*{.ts,.js}'],
+      cli: {
+        entitiesDir: 'src',
+        migrationsDir: 'src/database/migrations',
+        subscribersDir: 'subscriber',
+      },
       extra: {
         // based on https://node-postgres.com/apis/pool
         // max connection pool size

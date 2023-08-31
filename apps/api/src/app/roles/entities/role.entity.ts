@@ -4,7 +4,7 @@ import { Allow } from 'class-validator';
 import { EntityHelper } from '../../utils/entity-helper';
 
 @Entity()
-export class Role {
+export class Role extends EntityHelper {
   @ApiProperty({ example: 1 })
   @PrimaryColumn()
   id: number;

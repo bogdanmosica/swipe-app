@@ -1,13 +1,9 @@
 import path from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import {
-  TypeOrmDataSourceFactory,
-  TypeOrmModule,
-  TypeOrmModuleOptions,
-} from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { HeaderResolver, I18nModule } from 'nestjs-i18n';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DevtoolsModule } from '@nestjs/devtools-integration';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -35,10 +31,13 @@ import appleConfig from './config/apple.config';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { AllConfigType } from './config/config.type';
 import { MailerModule } from './mailer/mailer.module';
-import { RoleModule } from './roles/roles.module';
 
 @Module({
   imports: [
+    DevtoolsModule.register({
+      http: process.env.NODE_ENV !== 'production',
+      port: 8000,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [
@@ -92,7 +91,6 @@ import { RoleModule } from './roles/roles.module';
     ColourPalettesModule,
     AdministrationEntitiesModule,
     AuthModule,
-    RoleModule,
     UsersModule,
     FilesModule,
     MailModule,

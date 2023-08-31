@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -14,6 +14,7 @@ import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
 import { Icons } from './icons';
 import { signIn } from '../lib/session';
+import { ToastIcon } from './toast-icon';
 
 type RegisterUserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -33,6 +34,7 @@ export function LoginUserAuthForm({
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   async function onSubmit(data: FormData) {
     setIsLoading(true);
@@ -43,7 +45,7 @@ export function LoginUserAuthForm({
     });
 
     setIsLoading(false);
-    console.log({ signInResult });
+
     if (!signInResult?.ok) {
       return toast({
         title: 'Something went wrong.',
@@ -52,8 +54,9 @@ export function LoginUserAuthForm({
       });
     }
 
+    router.push(searchParams?.get('from') || '/dashboard');
     return toast({
-      title: 'Succes',
+      title: 'Succes', // <ToastIcon type="succes" />,
       description: 'You successfully logged in.',
     });
   }

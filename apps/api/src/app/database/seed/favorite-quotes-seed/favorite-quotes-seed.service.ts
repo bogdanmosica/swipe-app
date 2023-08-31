@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
@@ -18,7 +18,7 @@ export class FavoriteQuotesSeedService {
   async run() {
     const countQuotes = await this.repository.count();
     if (!countQuotes) {
-      console.log(
+      Logger.log(
         "FavoriteQuotes: Favorite Quotes data does not exist, I'll create some data for you!"
       );
       const file = readFileSync(
@@ -45,7 +45,7 @@ export class FavoriteQuotesSeedService {
 
       await this.repository.insert(quotes);
 
-      console.log('FavoriteQuotes: Favorite Quotes data added!');
+      Logger.log('FavoriteQuotes: Favorite Quotes data added!');
     }
   }
 }

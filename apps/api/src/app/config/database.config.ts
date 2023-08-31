@@ -10,6 +10,7 @@ import {
   IsBoolean,
 } from 'class-validator';
 import validateConfig from '../utils/validate-config';
+import { Role } from '../roles/entities/role.entity';
 
 class EnvironmentVariablesValidator {
   @ValidateIf((envValues) => envValues.DATABASE_URL)
@@ -95,5 +96,6 @@ export default registerAs<DatabaseConfig>('database', () => {
     key: process.env.DATABASE_KEY,
     cert: process.env.DATABASE_CERT,
     autoLoadEntities: true,
+    entities: [Role],
   };
 });

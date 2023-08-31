@@ -12,6 +12,54 @@
         "color": true
       }
     },
+    "typeorm": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node -P apps/api/tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+        "envFile": "apps/api/.env",
+        "color": true
+      }
+    },
+    "migration:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run api:typeorm -- --dataSource=apps/api/src/app/database/data-source.ts migration:generate",
+        "envFile": "apps/api/.env",
+        "color": true
+      }
+    },
+    "migration:create": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run api:typeorm -- migration:create",
+        "envFile": "apps/api/.env",
+        "color": true
+      }
+    },
+    "migration:run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run api:typeorm -- --dataSource=apps/api/src/app/database/data-source.ts migration:run",
+        "envFile": "apps/api/.env",
+        "color": true
+      }
+    },
+    "migration:revert": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run api:typeorm -- --dataSource=apps/api/src/app/database/data-source.ts migration:revert",
+        "envFile": "apps/api/.env",
+        "color": true
+      }
+    },
+    "schema:drop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run api:typeorm -- --dataSource=apps/api/src/app/database/data-source.ts schema:drop",
+        "envFile": "apps/api/.env",
+        "color": true
+      }
+    },
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": [

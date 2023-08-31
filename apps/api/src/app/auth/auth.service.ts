@@ -197,15 +197,15 @@ export class AuthService {
   async register(dto: AuthRegisterLoginDto): Promise<void> {
     const user = await this.usersService.findOne({ email: dto.email });
 
-    // if (user) {
-    //   throw new HttpException(
-    //     {
-    //       status: HttpStatus.UNPROCESSABLE_ENTITY,
-    //       message: 'Email exists, use the login page',
-    //     },
-    //     HttpStatus.UNPROCESSABLE_ENTITY
-    //   );
-    // }
+    if (user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          message: 'Email exists, use the login page',
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY
+      );
+    }
 
     const hash = crypto
       .createHash('sha256')
@@ -436,9 +436,8 @@ export class AuthService {
       {
         infer: true,
       }
-    );
-
-    const tokenExpires = Date.now() + ms(+tokenExpiresIn);
+    ) as string;
+    const tokenExpires = Date.now() + ms(tokenExpiresIn);
 
     const [token, refreshToken] = await Promise.all([
       await this.jwtService.signAsync(
@@ -452,7 +451,7 @@ export class AuthService {
             'auth.secret' as keyof AllConfigType,
             { infer: true }
           ),
-          expiresIn: +tokenExpiresIn,
+          expiresIn: tokenExpiresIn,
         }
       ),
       await this.jwtService.signAsync(
