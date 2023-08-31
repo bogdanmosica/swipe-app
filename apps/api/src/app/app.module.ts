@@ -35,6 +35,7 @@ import appleConfig from './config/apple.config';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { AllConfigType } from './config/config.type';
 import { MailerModule } from './mailer/mailer.module';
+import { RoleModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -91,9 +92,9 @@ import { MailerModule } from './mailer/mailer.module';
     ColourPalettesModule,
     AdministrationEntitiesModule,
     AuthModule,
+    RoleModule,
     UsersModule,
     FilesModule,
-    AuthModule,
     MailModule,
     // AuthFacebookModule,
     // AuthGoogleModule,

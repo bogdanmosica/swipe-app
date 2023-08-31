@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { cn, buttonVariants } from '@swipe-app/shared-ui';
 import { Icons } from '../../../components/icons';
 import { RegisterUserAuthForm } from '../../../components/register-user-auth-form';
+import { Suspense } from 'react';
+import { UserAuthFormFallback } from 'apps/web/components/fallbacks/user-auth-form-fallback';
 
 export const metadata = {
   title: 'Create an account',
@@ -35,7 +37,9 @@ export default function RegisterPage() {
               Enter your email below to create your account
             </p>
           </div>
-          <RegisterUserAuthForm />
+          <Suspense fallback={<UserAuthFormFallback />}>
+            <RegisterUserAuthForm />
+          </Suspense>
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{' '}
             <Link

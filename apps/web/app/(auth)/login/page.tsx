@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { cn, buttonVariants } from '@swipe-app/shared-ui';
 import { Icons } from '../../../components/icons';
 import { LoginUserAuthForm } from '../../../components/login-user-auth-form';
+import { UserAuthFormFallback } from 'apps/web/components/fallbacks/user-auth-form-fallback';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -35,7 +37,9 @@ export default function LoginPage() {
             Enter your email to sign in to your account
           </p>
         </div>
-        <LoginUserAuthForm />
+        <Suspense fallback={<UserAuthFormFallback />}>
+          <LoginUserAuthForm />
+        </Suspense>
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
             href="/register"
