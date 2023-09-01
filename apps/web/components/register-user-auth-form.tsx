@@ -14,6 +14,7 @@ import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
 import { Icons } from './icons';
 import { signUp } from '../lib/session';
+import useMainStoreContext from '../hooks/use-main-store-context';
 
 type RegisterUserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -30,6 +31,7 @@ export function RegisterUserAuthForm({
   } = useForm<FormData>({
     resolver: zodResolver(registerUserAuthSchema),
   });
+  const { setUserEmail } = useMainStoreContext();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
@@ -44,6 +46,8 @@ export function RegisterUserAuthForm({
     });
 
     setIsLoading(false);
+
+    if (signUpResult.ok) setUserEmail(data.email.toLowerCase());
 
     if (!signUpResult.ok) {
       if (signUpResult.error) {
@@ -62,11 +66,7 @@ export function RegisterUserAuthForm({
       }
     }
 
-    router.push(searchParams?.get('from') || '/dashboard');
-    return toast({
-      title: 'Check your email',
-      description: 'We sent you a login link. Be sure to check your spam too.',
-    });
+    router.push(searchParams?.get('from') || '/almost-there');
   }
 
   return (

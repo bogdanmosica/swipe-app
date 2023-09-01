@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptions } from '../utils/types/find-options.type';
-import { DeepPartial, Not, Repository } from 'typeorm';
+import { DeepPartial, FindOptionsWhere, Not, Repository } from 'typeorm';
 import { Session } from './entities/session.entity';
 import { NullableType } from '../utils/types/nullable.type';
 import { User } from '../users/entities/user.entity';
@@ -26,6 +26,12 @@ export class SessionService {
   }
 
   async create(data: DeepPartial<Session>): Promise<Session> {
+    const userSession = this.sessionRepository.findOne({
+      where: {
+        userId: data.id,
+      } as FindOptionsWhere<Session>,
+    });
+    if (userSession) return null;
     return this.sessionRepository.save(this.sessionRepository.create(data));
   }
 

@@ -84,6 +84,10 @@ module.exports = {
           '50%': { content: 'Unique' },
           '75%': { content: 'Creative', opacity: 1 },
         },
+        'emoji-change': {
+          '0%': { content: '💣', opacity: 0.1 },
+          '75%': { content: '🔥', opacity: 1 },
+        },
         'text-up': {
           '0%': {
             transform: 'translateY(-100%)',
@@ -106,6 +110,7 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         wiggle: 'wiggle 1s ease-in-out infinite',
         'text-change': 'text-change 8s infinite',
+        'emoji-change': 'emoji-change 2s infinite',
         'text-up': 'text-up 1s infinite',
         'text-down': 'text-down 1s infinite',
       },

@@ -412,7 +412,7 @@ export class AuthService {
     return {
       token,
       refreshToken,
-      tokenExpires: +tokenExpires,
+      tokenExpires,
     };
   }
 

@@ -8,6 +8,7 @@ import { cn, Toaster } from '@swipe-app/shared-ui';
 import { Analytics } from '../components/analytics';
 import { TailwindIndicator } from '../components/tailwind-indicator';
 import { ThemeProvider } from '../components/theme-provider';
+import MainStoreContextProvider from '../contexts/main-store';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <MainStoreContextProvider>{children}</MainStoreContextProvider>
           <Analytics />
           <Toaster />
           <TailwindIndicator />
