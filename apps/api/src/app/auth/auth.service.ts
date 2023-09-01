@@ -95,6 +95,7 @@ export class AuthService {
         HttpStatus.UNPROCESSABLE_ENTITY
       );
     }
+    //debugger;
 
     const session = await this.sessionService.create({
       user,
