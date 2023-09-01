@@ -25,13 +25,13 @@ export class SessionService {
     });
   }
 
-  async create(data: DeepPartial<Session>): Promise<Session> {
+  async create(data?: DeepPartial<Session>): Promise<Session> {
     const userSession = this.sessionRepository.findOne({
       where: {
         userId: data.id,
       } as FindOptionsWhere<Session>,
     });
-    if (userSession) return null;
+    if (userSession) return userSession;
     return this.sessionRepository.save(this.sessionRepository.create(data));
   }
 

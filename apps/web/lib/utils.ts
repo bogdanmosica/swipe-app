@@ -1,11 +1,9 @@
 import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { env } from '../env.mjs';
-
 export const SWIPE_API_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://swipe-app-production.up.railway.app/api'
+    ? process.env.BACKEND_URL
     : 'http://localhost:3000/api';
 
 export function cn(...inputs: ClassValue[]) {
@@ -22,5 +20,5 @@ export function formatDate(input: string | number): string {
 }
 
 export function absoluteUrl(path: string) {
-  return `${env.NEXT_PUBLIC_APP_URL}${path}`;
+  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
