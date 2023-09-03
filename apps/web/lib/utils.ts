@@ -2,7 +2,7 @@ import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export const SWIPE_API_URL =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === 'production' && process.env.BACKEND_URL
     ? process.env.BACKEND_URL
     : 'http://localhost:3000/api';
 

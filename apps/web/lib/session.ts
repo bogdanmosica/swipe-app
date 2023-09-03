@@ -1,7 +1,6 @@
 import { UserSignInSocial } from '../types';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { SWIPE_API_URL } from './utils';
-import Router from 'next/router';
 
 export async function getCurrentUser() {
   //const session = await getServerSession(authOptions);
@@ -24,7 +23,10 @@ type SignInParamsType = {
   password: string;
 };
 
-export function signIn(signInType: UserSignInSocial, params: SignInParamsType) {
+export async function signIn(
+  signInType: UserSignInSocial,
+  params: SignInParamsType
+) {
   const { email, password } = params;
   const userData: FetchedUserDataType = {
     ok: false,
