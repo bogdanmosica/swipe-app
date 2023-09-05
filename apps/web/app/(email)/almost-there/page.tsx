@@ -6,7 +6,7 @@ import { buttonVariants } from '@swipe-app/shared-ui';
 import useMainStoreContext from '../../../hooks/use-main-store-context';
 
 export default function AlmostTherePage() {
-  const { userEmail } = useMainStoreContext();
+  const { user } = useMainStoreContext();
   return (
     <section className="container flex flex-col  gap-6 py-8 md:max-w-[64rem] md:py-12 lg:py-24">
       <div className="mx-auto flex w-full flex-col gap-4">
@@ -17,7 +17,7 @@ export default function AlmostTherePage() {
       <div className="flex-col justify-center items-center w-full gap-10 rounded-lg border p-10 text-center">
         <p className="max-w-[85%] m-auto mb-5 leading-normal sm:text-lg sm:leading-7">
           {`We've sent you an email at `}
-          <strong>{userEmail}</strong>
+          <strong>{user.email}</strong>
         </p>
         <p className="max-w-[85%] m-auto mb-5 leading-normal sm:text-lg sm:leading-7">
           Please follow the instructions in the email.

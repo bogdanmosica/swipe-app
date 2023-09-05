@@ -1,10 +1,17 @@
 import { UserSignInSocial } from '../types';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { SWIPE_API_URL } from './utils';
+import { toast } from '@swipe-app/shared-ui';
 
 export async function getCurrentUser() {
-  //const session = await getServerSession(authOptions);
-  //return session?.user;
+  return axios
+    .get(`${SWIPE_API_URL}/auth/me`, { withCredentials: true })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 }
 
 type FetchedUserDataType = {
@@ -36,7 +43,11 @@ export async function signIn(
 
   const signInObj = {
     email: () =>
-      axios.post(`${SWIPE_API_URL}/auth/email/login`, { email, password }),
+      axios.post(
+        `${SWIPE_API_URL}/auth/email/login`,
+        { email, password },
+        { withCredentials: true }
+      ),
     github: () =>
       axios.post(`${SWIPE_API_URL}/auth/github/login`, {
         email,
@@ -108,5 +119,35 @@ export async function signUp(
     .catch((error) => {
       userData.error = error?.response?.data;
       return userData;
+    });
+}
+
+export async function signOut() {
+  return axios
+    .post(`${SWIPE_API_URL}/auth/logout`, {}, { withCredentials: true })
+    .then((response) => {
+      toast({
+        title: 'Shame :(',
+        description: 'You successfully logged out.',
+      });
+      return response;
+    })
+    .catch((error) => {
+      toast({
+        title: 'Something went wrong',
+        variant: 'destructive',
+      });
+      throw new Error(error);
+    });
+}
+
+export async function signBackIn() {
+  return axios
+    .get(`${SWIPE_API_URL}/auth/me`, { withCredentials: true })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw new Error(error);
     });
 }

@@ -1,11 +1,8 @@
-import Link from 'next/link';
-
 import { marketingConfig } from '../../config/marketing';
-import { cn } from '../../lib/utils';
-import { buttonVariants } from '@swipe-app/shared-ui';
 import { MainNav } from '../../components/main-nav';
 import { SiteFooter } from '../../components/site-footer';
 import { ModeToggle } from '../../components/mode-toggle';
+import LoginAvatarBtn from '../../components/login-avatar-btn';
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -21,15 +18,7 @@ export default async function MarketingLayout({
           <MainNav items={marketingConfig.mainNav} />
           <nav className="flex items-center">
             <ModeToggle />
-            <Link
-              href="/login"
-              className={cn(
-                buttonVariants({ variant: 'secondary', size: 'sm' }),
-                'px-4 ml-4'
-              )}
-            >
-              Login
-            </Link>
+            <LoginAvatarBtn />
           </nav>
         </div>
       </header>

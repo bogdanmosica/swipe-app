@@ -2,6 +2,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  Res,
   UnauthorizedException,
 } from '@nestjs/common';
 import ms from 'ms';
@@ -12,7 +13,9 @@ import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
 import { AuthUpdateDto } from './dto/auth-update.dto';
 import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 import crypto from 'crypto';
+import { Response } from 'express';
 import { plainToClass } from 'class-transformer';
+
 import { AuthProvidersEnum } from './auth-providers.enum';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
 import { LoginResponseType } from './types/login-response.type';
@@ -45,10 +48,10 @@ export class AuthService {
 
   async validateLogin(
     loginDto: AuthEmailLoginDto,
-    onlyAdmin: boolean
+    onlyAdmin: boolean,
+    response: Response
   ): Promise<LoginResponseType> {
     const user = await this.usersService.findOne({ email: loginDto.email });
-
     if (
       !user ||
       (user?.role &&
@@ -107,11 +110,26 @@ export class AuthService {
       sessionId: session.id,
     });
 
+    response.cookie('refreshToken', refreshToken, {
+      expires: new Date(tokenExpires),
+      sameSite: 'strict',
+      httpOnly: true,
+    });
+    response.cookie('token', token, {
+      expires: new Date(tokenExpires),
+      sameSite: 'strict',
+      httpOnly: true,
+    });
+
     return {
-      refreshToken,
-      token,
-      tokenExpires: +tokenExpires,
-      user,
+      // refreshToken,
+      // token,
+      // tokenExpires,
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
     };
   }
 
@@ -190,7 +208,7 @@ export class AuthService {
     return {
       refreshToken,
       token: jwtToken,
-      tokenExpires: +tokenExpires,
+      tokenExpires: tokenExpires,
       user,
     };
   }
@@ -421,7 +439,19 @@ export class AuthService {
     await this.usersService.softDelete(user.id);
   }
 
-  async logout(data: Pick<JwtRefreshPayloadType, 'sessionId'>) {
+  async logout(
+    data: Pick<JwtRefreshPayloadType, 'sessionId'>,
+    response: Response
+  ) {
+    response.clearCookie('refreshToken', {
+      sameSite: 'strict',
+      httpOnly: true,
+    });
+    response.clearCookie('token', {
+      sameSite: 'strict',
+      httpOnly: true,
+    });
+
     return this.sessionService.softDelete({
       id: data.sessionId,
     });

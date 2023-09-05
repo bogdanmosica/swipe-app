@@ -31,7 +31,7 @@ export function RegisterUserAuthForm({
   } = useForm<FormData>({
     resolver: zodResolver(registerUserAuthSchema),
   });
-  const { setUserEmail } = useMainStoreContext();
+  const { user, setUser } = useMainStoreContext();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
@@ -47,7 +47,7 @@ export function RegisterUserAuthForm({
 
     setIsLoading(false);
 
-    if (signUpResult.ok) setUserEmail(data.email.toLowerCase());
+    if (signUpResult.ok) setUser({ ...user, email: data.email.toLowerCase() });
 
     if (!signUpResult.ok) {
       if (signUpResult.error) {

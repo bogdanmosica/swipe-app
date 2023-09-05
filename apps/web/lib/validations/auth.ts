@@ -5,10 +5,10 @@ export const registerUserAuthSchema = z
     email: z.string().email().min(1, { message: 'Email is required' }),
     password: z
       .string()
-      .min(4, { message: 'Password is to short, min 4 characters' }),
+      .min(6, { message: 'Password is to short, min 6 characters' }),
     confirmPassword: z
       .string()
-      .min(4, { message: 'Password is to short, min 4 characters' }),
+      .min(6, { message: 'Password is to short, min 6 characters' }),
     isVerified: z.boolean().optional(),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
@@ -24,5 +24,5 @@ export const loginUserAuthSchema = z.object({
   email: z.string().email().min(1, { message: 'Email is required' }),
   password: z
     .string()
-    .min(4, { message: 'Password is to short, min 4 characters' }),
+    .min(6, { message: 'Password is to short, min 6 characters' }),
 });

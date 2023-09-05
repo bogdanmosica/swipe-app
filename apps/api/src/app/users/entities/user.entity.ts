@@ -10,7 +10,6 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
-  OneToMany,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { genSalt, hash } from 'bcryptjs';

@@ -8,6 +8,11 @@ export const marketingConfig: MarketingConfig = {
       href: '/#features',
     },
     {
+      title: 'Dashboard',
+      href: '/dashboard',
+      needAuth: true,
+    },
+    {
       title: 'Pricing',
       href: '/pricing',
     },

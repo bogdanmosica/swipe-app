@@ -10,9 +10,14 @@ import {
   Patch,
   Delete,
   SerializeOptions,
+  Res,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { Response } from 'express';
+import { TransformInstanceToPlain } from 'class-transformer';
 import { AuthService } from './auth.service';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
 import { AuthForgotPasswordDto } from './dto/auth-forgot-password.dto';
 import { AuthConfirmEmailDto } from './dto/auth-confirm-email.dto';
@@ -29,6 +34,7 @@ import { NullableType } from '../utils/types/nullable.type';
   path: 'auth',
   version: '1',
 })
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
@@ -37,10 +43,16 @@ export class AuthController {
   })
   @Post('email/login')
   @HttpCode(HttpStatus.OK)
-  public login(
-    @Body() loginDto: AuthEmailLoginDto
+  public async login(
+    @Body() loginDto: AuthEmailLoginDto,
+    @Res({ passthrough: true }) response: Response
   ): Promise<LoginResponseType> {
-    return this.service.validateLogin(loginDto, false);
+    const userAuth = await this.service.validateLogin(
+      loginDto,
+      false,
+      response
+    );
+    return userAuth;
   }
 
   @SerializeOptions({
@@ -49,9 +61,10 @@ export class AuthController {
   @Post('admin/email/login')
   @HttpCode(HttpStatus.OK)
   public adminLogin(
-    @Body() loginDTO: AuthEmailLoginDto
+    @Body() loginDto: AuthEmailLoginDto,
+    @Res({ passthrough: true }) response: Response
   ): Promise<LoginResponseType> {
-    return this.service.validateLogin(loginDTO, true);
+    return this.service.validateLogin(loginDto, true, response);
   }
 
   @Post('email/register')
@@ -85,7 +98,7 @@ export class AuthController {
     );
   }
 
-  @ApiBearerAuth()
+  @ApiCookieAuth('token')
   @SerializeOptions({
     groups: ['me'],
   })
@@ -96,7 +109,7 @@ export class AuthController {
     return this.service.me(request.user);
   }
 
-  @ApiBearerAuth()
+  @ApiCookieAuth('token')
   @SerializeOptions({
     groups: ['me'],
   })
@@ -107,17 +120,23 @@ export class AuthController {
     return this.service.refreshToken(request.user.sessionId);
   }
 
-  @ApiBearerAuth()
+  @ApiCookieAuth('token')
   @Post('logout')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
-  public async logout(@Request() request): Promise<void> {
-    await this.service.logout({
-      sessionId: request.user.sessionId,
-    });
+  public async logout(
+    @Request() request,
+    @Res({ passthrough: true }) response: Response
+  ): Promise<void> {
+    await this.service.logout(
+      {
+        sessionId: request.user.sessionId,
+      },
+      response
+    );
   }
 
-  @ApiBearerAuth()
+  @ApiCookieAuth('token')
   @SerializeOptions({
     groups: ['me'],
   })
@@ -131,7 +150,7 @@ export class AuthController {
     return this.service.update(request.user, userDto);
   }
 
-  @ApiBearerAuth()
+  @ApiCookieAuth('token')
   @Delete('me')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)

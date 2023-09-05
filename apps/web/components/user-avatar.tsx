@@ -2,17 +2,17 @@ import { AvatarProps } from '@radix-ui/react-avatar';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@swipe-app/shared-ui';
 import { Icons } from '../components/icons';
-import { User } from '../types';
+import { UserState } from '../contexts/main-store';
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<User, 'image' | 'name'>;
+  user: Pick<UserState, 'photo' | 'name'>;
 }
 
 export function UserAvatar({ user, ...props }: UserAvatarProps) {
   return (
     <Avatar {...props}>
-      {user.image ? (
-        <AvatarImage alt="Picture" src={user.image} />
+      {user.photo ? (
+        <AvatarImage alt="Picture" src={user.photo} />
       ) : (
         <AvatarFallback>
           <span className="sr-only">{user.name}</span>

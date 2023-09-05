@@ -24,6 +24,7 @@ export type NavItem = {
   title: string;
   href: string;
   disabled?: boolean;
+  needAuth?: boolean;
 };
 
 export type MainNavItem = NavItem;
@@ -35,7 +36,7 @@ export type SidebarNavItem = {
   icon?: keyof typeof Icons;
 } & (
   | {
-      href: string;
+      href?: string;
       items?: never;
     }
   | {

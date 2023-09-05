@@ -9,6 +9,7 @@ import { siteConfig } from '../config/site';
 import { cn } from '../lib/utils';
 import { Icons } from '../components/icons';
 import { MobileNav } from '../components/mobile-nav';
+import useMainStoreContext from '../hooks/use-main-store-context';
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -19,6 +20,7 @@ interface MainNavProps {
 export function MainNav({ className, items, children }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
+  const { isUserAuthenticated } = useMainStoreContext();
 
   return (
     <div className={cn('flex gap-6 md:gap-10', className)}>
@@ -39,7 +41,8 @@ export function MainNav({ className, items, children }: MainNavProps) {
                 item.href.startsWith(`/${segment}`)
                   ? 'text-foreground'
                   : 'text-foreground/60',
-                item.disabled && 'cursor-not-allowed opacity-80'
+                item.disabled && 'cursor-not-allowed opacity-80',
+                item.needAuth && !isUserAuthenticated && 'hidden'
               )}
             >
               {item.title}
@@ -51,7 +54,7 @@ export function MainNav({ className, items, children }: MainNavProps) {
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
-        {showMobileMenu ? <Icons.close /> : <Icons.logo />}
+        {showMobileMenu ? <Icons.close /> : <Icons.circleChevronRight />}
         <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (

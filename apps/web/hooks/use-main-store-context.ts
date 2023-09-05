@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { MainStoreContext, MainStoreContextType } from '../contexts/main-store';
+'use client';
+import { useContext } from 'react';
+import { MainStoreContext } from '../contexts/main-store';
 
 export default function useMainStoreContext() {
   const mainStoreContext = useContext(MainStoreContext);

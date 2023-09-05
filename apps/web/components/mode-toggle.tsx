@@ -9,12 +9,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@swipe-app/shared-ui';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@swipe-app/shared-ui';
 
 import { Icons } from '../components/icons';
 

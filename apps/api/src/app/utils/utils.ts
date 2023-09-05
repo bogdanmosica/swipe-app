@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import bcrypt from 'bcrypt';
 
 /**
@@ -43,3 +44,13 @@ export function getVariableName<TResult>(getVar: () => TResult): string {
 
   return memberParts[memberParts.length - 1];
 }
+
+export const CookieExtractor = (req: Request) => {
+  let jwt = null;
+
+  if (req && req.cookies) {
+    jwt = req.cookies['token'];
+  }
+
+  return jwt;
+};

@@ -14,7 +14,7 @@ import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
 import { Icons } from './icons';
 import { signIn } from '../lib/session';
-import { ToastIcon } from './toast-icon';
+import useMainStoreContext from '../hooks/use-main-store-context';
 
 type RegisterUserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -31,6 +31,7 @@ export function LoginUserAuthForm({
   } = useForm<FormData>({
     resolver: zodResolver(loginUserAuthSchema),
   });
+  const { setIsUserAuthenticated } = useMainStoreContext();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
@@ -54,7 +55,8 @@ export function LoginUserAuthForm({
       });
     }
 
-    router.push(searchParams?.get('from') || '/dashboard');
+    setIsUserAuthenticated(signInResult?.ok);
+    router.push(`/${searchParams?.get('from') || 'dashboard'}`);
     return toast({
       title: 'Succes', // <ToastIcon type="succes" />,
       description: 'You successfully logged in.',

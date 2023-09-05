@@ -1,4 +1,4 @@
-// Inspired by react-hot-toast library
+'use client'; // Inspired by react-hot-toast library
 import React from 'react';
 
 import { ToastActionElement, type ToastProps } from './toast';

@@ -4,24 +4,28 @@
  */
 
 import { Logger } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';
+import * as cookieParser from 'cookie-parser';
 
 import { AppModule } from './app/app.module';
-import { runSeed } from './app/database/seed/run-seed';
 import { ConfigService } from '@nestjs/config';
 import { AllConfigType } from './app/config/config.type';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { SeedService } from './app/database/seed/seed.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    cors: true,
+    cors: {
+      origin: ['http://localhost:4200', process.env.FRONTEND_DOMAIN],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+    },
     snapshot: true,
   });
   app.get(SeedService).runSeed();
-
+  app.use(cookieParser.default());
   const configService = app.get(ConfigService<AllConfigType>);
 
   app.setGlobalPrefix(
@@ -30,16 +34,18 @@ async function bootstrap() {
       exclude: ['/'],
     }
   );
-  const options = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('API docs')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-  //app.useStaticAssets(join(__dirname, '..', 'assets'));
+  console.log(process.env.NODE_ENV);
+  if (process.env.NODE_ENV !== 'production') {
+    const options = new DocumentBuilder()
+      .setTitle('API')
+      .setDescription('API docs')
+      .setVersion('1.0')
+      .addCookieAuth('token')
+      .build();
 
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('docs', app, document);
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('docs', app, document);
+  }
 
   const port = process.env.PORT || 3000;
   await app.listen(
