@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { SWIPE_API_URL } from '../lib/utils';
+import { SWIPE_BACKEND_URL } from '../lib/utils';
 import { useRouter } from 'next/navigation';
 
 type MainStoreContextProviderProps = {
@@ -48,7 +48,7 @@ export default function MainStoreContextProvider({
 
   useEffect(() => {
     axios
-      .get<UserState>(`${SWIPE_API_URL}/auth/me`, { withCredentials: true })
+      .get<UserState>(`${SWIPE_BACKEND_URL}/auth/me`, { withCredentials: true })
       .then((response) => {
         setUser({ ...response.data });
         setIsUserAuthenticated(true);

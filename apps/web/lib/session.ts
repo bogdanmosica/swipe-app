@@ -1,11 +1,11 @@
 import { UserSignInSocial } from '../types';
 import axios, { AxiosResponse, AxiosError } from 'axios';
-import { SWIPE_API_URL } from './utils';
+import { SWIPE_BACKEND_URL } from './utils';
 import { toast } from '@swipe-app/shared-ui';
 
 export async function getCurrentUser() {
   return axios
-    .get(`${SWIPE_API_URL}/auth/me`, { withCredentials: true })
+    .get(`${SWIPE_BACKEND_URL}/auth/me`, { withCredentials: true })
     .then((response) => {
       return response;
     })
@@ -44,22 +44,22 @@ export async function signIn(
   const signInObj = {
     email: () =>
       axios.post(
-        `${SWIPE_API_URL}/auth/email/login`,
+        `${SWIPE_BACKEND_URL}/auth/email/login`,
         { email, password },
         { withCredentials: true }
       ),
     github: () =>
-      axios.post(`${SWIPE_API_URL}/auth/github/login`, {
+      axios.post(`${SWIPE_BACKEND_URL}/auth/github/login`, {
         email,
         password,
       }),
     google: () =>
-      axios.post(`${SWIPE_API_URL}/auth/google/login`, {
+      axios.post(`${SWIPE_BACKEND_URL}/auth/google/login`, {
         email,
         password,
       }),
     facebook: () =>
-      axios.post(`${SWIPE_API_URL}/auth/facebook/login`, {
+      axios.post(`${SWIPE_BACKEND_URL}/auth/facebook/login`, {
         email,
         password,
       }),
@@ -91,19 +91,22 @@ export async function signUp(
 
   const signInObj = {
     email: () =>
-      axios.post(`${SWIPE_API_URL}/auth/email/register`, { email, password }),
+      axios.post(`${SWIPE_BACKEND_URL}/auth/email/register`, {
+        email,
+        password,
+      }),
     github: () =>
-      axios.post(`${SWIPE_API_URL}/auth/github/register`, {
+      axios.post(`${SWIPE_BACKEND_URL}/auth/github/register`, {
         email,
         password,
       }),
     google: () =>
-      axios.post(`${SWIPE_API_URL}/auth/google/register`, {
+      axios.post(`${SWIPE_BACKEND_URL}/auth/google/register`, {
         email,
         password,
       }),
     facebook: () =>
-      axios.post(`${SWIPE_API_URL}/auth/facebook/register`, {
+      axios.post(`${SWIPE_BACKEND_URL}/auth/facebook/register`, {
         email,
         password,
       }),
@@ -124,7 +127,7 @@ export async function signUp(
 
 export async function signOut() {
   return axios
-    .post(`${SWIPE_API_URL}/auth/logout`, {}, { withCredentials: true })
+    .post(`${SWIPE_BACKEND_URL}/auth/logout`, {}, { withCredentials: true })
     .then((response) => {
       toast({
         title: 'Shame :(',
@@ -143,7 +146,7 @@ export async function signOut() {
 
 export async function signBackIn() {
   return axios
-    .get(`${SWIPE_API_URL}/auth/me`, { withCredentials: true })
+    .get(`${SWIPE_BACKEND_URL}/auth/me`, { withCredentials: true })
     .then((response) => {
       return response;
     })

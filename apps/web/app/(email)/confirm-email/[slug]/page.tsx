@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 
-import { SWIPE_API_URL, cn } from '../../../../lib/utils';
+import { SWIPE_BACKEND_URL, cn } from '../../../../lib/utils';
 import { buttonVariants } from '@swipe-app/shared-ui';
 import { Icons } from '../../../../components/icons';
 import { useEffect } from 'react';
@@ -22,7 +22,7 @@ export default function ConfirmEmailPage({
 
   useEffect(() => {
     axios
-      .post(`${SWIPE_API_URL}/auth/email/confirm`, {
+      .post(`${SWIPE_BACKEND_URL}/auth/email/confirm`, {
         hash: slug,
       })
       .then((response) => {

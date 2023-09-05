@@ -1,9 +1,8 @@
 import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export const SWIPE_API_URL = process.env.BACKEND_URL
-  ? process.env.BACKEND_URL
-  : 'http://localhost:3000/api';
+export const SWIPE_BACKEND_URL =
+  process.env.SWIPE_BACKEND_URL || 'http://localhost:3000/api';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
