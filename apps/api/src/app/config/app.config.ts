@@ -30,7 +30,7 @@ class EnvironmentVariablesValidator {
 
   @IsUrl({ require_tld: false })
   @IsOptional()
-  FRONTEND_DOMAIN: string;
+  SWIPE_APP_WEB_DOMAIN: string;
 
   @IsUrl({ require_tld: false })
   @IsOptional()
@@ -56,7 +56,7 @@ export default registerAs<AppConfig>('app', () => {
     nodeEnv: process.env.NODE_ENV || Environment.Development,
     name: process.env.APP_NAME || 'swipe-app-api',
     workingDirectory: process.env.PWD || process.cwd(),
-    frontendDomain: process.env.FRONTEND_DOMAIN ?? 'http://localhost:4200',
+    frontendDomain: process.env.SWIPE_APP_WEB_DOMAIN ?? 'http://localhost:4200',
     backendDomain: process.env.BACKEND_DOMAIN ?? 'http://localhost',
     port: process.env.APP_PORT
       ? parseInt(process.env.APP_PORT, 10)
