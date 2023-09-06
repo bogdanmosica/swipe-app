@@ -31,7 +31,7 @@ export function LoginUserAuthForm({
   } = useForm<FormData>({
     resolver: zodResolver(loginUserAuthSchema),
   });
-  const { setIsUserAuthenticated } = useMainStoreContext();
+  const { setIsUserAuthenticated, setUser } = useMainStoreContext();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
@@ -56,6 +56,10 @@ export function LoginUserAuthForm({
     }
 
     setIsUserAuthenticated(signInResult?.ok);
+    setUser((state) => ({
+      ...state,
+      email: data.email.toLowerCase(),
+    }));
     router.push(`/${searchParams?.get('from') || 'dashboard'}`);
     return toast({
       title: 'Succes', // <ToastIcon type="succes" />,
