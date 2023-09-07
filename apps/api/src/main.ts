@@ -15,6 +15,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { SeedService } from './app/database/seed/seed.service';
 
 async function bootstrap() {
+  console.log(process.env.SWIPE_APP_WEB_DOMAIN);
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
       origin: process.env.SWIPE_APP_WEB_DOMAIN,
