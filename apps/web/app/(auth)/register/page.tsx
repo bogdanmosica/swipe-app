@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { cn, buttonVariants } from '@swipe-app/shared-ui';
 import { Icons } from '../../../components/icons';
-import { RegisterUserAuthForm } from '../../../components/register-user-auth-form';
+import { RegisterUserAuthForm } from '../../../components/forms/register-user-auth-form';
 import { Suspense } from 'react';
 import { UserAuthFormFallback } from '../../../components/fallbacks/user-auth-form-fallback';
 

@@ -6,32 +6,29 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { cn } from '../lib/utils';
-import { registerUserAuthSchema } from '../lib/validations/auth';
+import { cn } from '../../lib/utils';
+import { loginUserAuthSchema } from '../../lib/validations/auth';
 import { buttonVariants } from '@swipe-app/shared-ui';
 import { Input } from '@swipe-app/shared-ui';
 import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
-import { Icons } from './icons';
-import { signUp } from '../lib/session';
-import useMainStoreContext from '../hooks/use-main-store-context';
+import { Icons } from '../icons';
+import { signIn } from '../../lib/session';
+import useMainStoreContext from '../../hooks/use-main-store-context';
 
-type RegisterUserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
+type LoginUserAuthProps = React.HTMLAttributes<HTMLDivElement>;
 
-type FormData = z.infer<typeof registerUserAuthSchema>;
+type FormData = z.infer<typeof loginUserAuthSchema>;
 
-export function RegisterUserAuthForm({
-  className,
-  ...props
-}: RegisterUserAuthFormProps) {
+export function LoginUserAuthForm({ className, ...props }: LoginUserAuthProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(registerUserAuthSchema),
+    resolver: zodResolver(loginUserAuthSchema),
   });
-  const { user, setUser } = useMainStoreContext();
+  const { setIsUserAuthenticated, setUser } = useMainStoreContext();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
@@ -40,33 +37,31 @@ export function RegisterUserAuthForm({
   async function onSubmit(data: FormData) {
     setIsLoading(true);
 
-    const signUpResult = await signUp('email', {
+    const signInResult = await signIn('email', {
       email: data.email.toLowerCase(),
       password: data.password,
     });
 
     setIsLoading(false);
 
-    if (signUpResult.ok) setUser({ ...user, email: data.email.toLowerCase() });
-
-    if (!signUpResult.ok) {
-      if (signUpResult.error) {
-        router.push('/login');
-        return toast({
-          //title: `Error status: ${signUpResult.error.status}`,
-          description: signUpResult.error.message,
-          variant: 'destructive',
-        });
-      } else {
-        return toast({
-          title: 'Something went wrong.',
-          description: 'Your sign in request failed. Please try again.',
-          variant: 'destructive',
-        });
-      }
+    if (!signInResult?.ok) {
+      return toast({
+        title: 'Something went wrong.',
+        description: 'Your sign in request failed. Please try again.',
+        variant: 'destructive',
+      });
     }
 
-    router.push(searchParams?.get('from') || '/almost-there');
+    setIsUserAuthenticated(signInResult?.ok);
+    setUser((state) => ({
+      ...state,
+      email: data.email.toLowerCase(),
+    }));
+    router.push(`/${searchParams?.get('from') || 'dashboard'}`);
+    return toast({
+      title: 'Succes', // <ToastIcon type="succes" />,
+      description: 'You successfully logged in.',
+    });
   }
 
   return (
@@ -110,30 +105,12 @@ export function RegisterUserAuthForm({
                 {errors.password.message}
               </p>
             )}
-            <Label className="sr-only" htmlFor="confirmPassword">
-              Repeat Password
-            </Label>
-            <Input
-              id="confirmPassword"
-              placeholder=""
-              type="password"
-              autoCapitalize="none"
-              autoComplete="password"
-              autoCorrect="off"
-              disabled={isLoading || isGitHubLoading}
-              {...register('confirmPassword')}
-            />
-            {errors?.confirmPassword && (
-              <p className="px-1 text-xs text-red-600">
-                {errors.confirmPassword.message}
-              </p>
-            )}
           </div>
           <button className={cn(buttonVariants())} disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Sign up
+            Sign In with Email
           </button>
         </div>
       </form>
@@ -152,7 +129,7 @@ export function RegisterUserAuthForm({
         className={cn(buttonVariants({ variant: 'outline' }))}
         onClick={() => {
           setIsGitHubLoading(true);
-          //signIn('github');
+          //signIn('github', {});
         }}
         disabled={isLoading || isGitHubLoading}
       >

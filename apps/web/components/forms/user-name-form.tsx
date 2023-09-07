@@ -4,10 +4,11 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import * as z from 'zod';
 
-import { cn } from '../lib/utils';
-import { userNameSchema } from '../lib/validations/user';
+import { SWIPE_BACKEND_URL, cn } from '../../lib/utils';
+import { userNameSchema } from '../../lib/validations/user';
 import { buttonVariants } from '@swipe-app/shared-ui';
 import {
   Card,
@@ -20,17 +21,17 @@ import {
 import { Input } from '@swipe-app/shared-ui';
 import { Label } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
-import { Icons } from '../components/icons';
-import { User } from '../types';
+import { Icons } from '../icons';
+import { UserState } from '../../contexts/main-store';
+import useMainStoreContext from '../../hooks/use-main-store-context';
 
-interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, 'id' | 'name'>;
-}
+type UserNameFormProps = React.HTMLAttributes<HTMLFormElement>;
 
 type FormData = z.infer<typeof userNameSchema>;
 
-export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
+export function UserNameForm({ className, ...props }: UserNameFormProps) {
   const router = useRouter();
+  const { user } = useMainStoreContext();
   const {
     handleSubmit,
     register,
@@ -38,34 +39,32 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
     defaultValues: {
-      name: user?.name || '',
+      lastName: user?.lastName || '',
+      firstName: user?.firstName || '',
     },
   });
   const [isSaving, setIsSaving] = React.useState<boolean>(false);
+  const [updateUser, setUpdateUser] = React.useState<UserState>(user);
 
   async function onSubmit(data: FormData) {
     setIsSaving(true);
 
-    const response = await fetch(`/api/users/${user.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: data.name,
-      }),
-    });
+    const response = await axios.patch(
+      `${SWIPE_BACKEND_URL}/users/${user.id}`,
+      { ...data },
+      { withCredentials: true }
+    );
 
     setIsSaving(false);
 
-    if (!response?.ok) {
+    if (!response) {
       return toast({
         title: 'Something went wrong.',
         description: 'Your name was not updated. Please try again.',
         variant: 'destructive',
       });
     }
-
+    setUpdateUser({ ...response.data });
     toast({
       description: 'Your name has been updated.',
     });
@@ -79,27 +78,42 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       onSubmit={handleSubmit(onSubmit)}
       {...props}
     >
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Your Name</CardTitle>
-          <CardDescription>
-            Please enter your full name or a display name you are comfortable
-            with.
-          </CardDescription>
+          <CardDescription>Please enter your full name.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="name">
-              Name
+            <Label className="sr-only" htmlFor="firstName">
+              First name
             </Label>
             <Input
-              id="name"
-              className="w-[400px]"
+              id="firstName"
+              className=""
               size={32}
-              {...register('name')}
+              placeholder="First name..."
+              {...register('firstName')}
             />
-            {errors?.name && (
-              <p className="px-1 text-xs text-red-600">{errors.name.message}</p>
+            {errors?.firstName && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.firstName.message}
+              </p>
+            )}
+            <Label className="sr-only" htmlFor="lastName">
+              Last name
+            </Label>
+            <Input
+              id="lastName"
+              className=""
+              size={32}
+              placeholder="Last name..."
+              {...register('lastName')}
+            />
+            {errors?.lastName && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.lastName.message}
+              </p>
             )}
           </div>
         </CardContent>

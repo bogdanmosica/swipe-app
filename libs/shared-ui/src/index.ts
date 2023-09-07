@@ -19,7 +19,7 @@ export { Alert, AlertTitle, AlertDescription } from './lib/alert';
 export { AspectRatio } from './lib/aspect-ratio';
 export { Avatar, AvatarFallback, AvatarImage } from './lib/avatar';
 export { Badge, badgeVariants } from './lib/badge';
-export { Button, buttonVariants } from './lib/button';
+export { Button, type ButtonProps, buttonVariants } from './lib/button';
 export { Calendar } from './lib/calendar';
 export {
   Card,

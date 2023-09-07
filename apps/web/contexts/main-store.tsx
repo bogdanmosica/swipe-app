@@ -15,8 +15,10 @@ type MainStoreContextProviderProps = {
 };
 
 export type UserState = {
+  id?: string;
   email: string;
-  name?: string;
+  lastName?: string;
+  firstName?: string;
   photo?: string;
 };
 
@@ -39,7 +41,8 @@ export default function MainStoreContextProvider({
   const router = useRouter();
   const [user, setUser] = useState<UserState>({
     email: '',
-    name: '',
+    lastName: '',
+    firstName: '',
     photo: '',
   });
   const [isUserAuthenticated, setIsUserAuthenticated] =

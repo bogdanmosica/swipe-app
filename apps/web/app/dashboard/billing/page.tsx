@@ -1,9 +1,10 @@
 import { Alert, AlertDescription, AlertTitle } from '@swipe-app/shared-ui';
-import { BillingForm } from '../../../components/billing-form';
+import { BillingForm } from '../../../components/forms/billing-form';
 import { DashboardHeader } from '../../../components/header';
 import { Icons } from '../../../components/icons';
 import { DashboardShell } from '../../../components/shell';
 import ProtectedRoute from '../../../components/protected-route';
+import { stripe } from '../../../lib/stripe';
 
 export const metadata = {
   title: 'Billing',
@@ -11,14 +12,23 @@ export const metadata = {
 };
 
 export default async function BillingPage() {
+  const subscriptionPlan = {
+    isPro: false,
+    stripeCustomerId: 1,
+    stripeSubscriptionId: '1',
+    stripeCurrentPeriodEnd: 1,
+    name: '',
+    description: '',
+    stripePriceId: '',
+  };
   // If user has a pro plan, check cancel status on Stripe.
-  const isCanceled = false;
-  // if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
-  //   const stripePlan = await stripe.subscriptions.retrieve(
-  //     subscriptionPlan.stripeSubscriptionId
-  //   );
-  //   isCanceled = stripePlan.cancel_at_period_end;
-  // }
+  let isCanceled = false;
+  if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
+    const stripePlan = await stripe.subscriptions.retrieve(
+      subscriptionPlan.stripeSubscriptionId
+    );
+    isCanceled = stripePlan.cancel_at_period_end;
+  }
 
   return (
     <ProtectedRoute redirectPath="dashboard/billing">
@@ -32,8 +42,8 @@ export default async function BillingPage() {
             <Icons.warning />
             <AlertTitle>This is a demo app.</AlertTitle>
             <AlertDescription>
-              Taxonomy app is a demo app using a Stripe test environment. You
-              can find a list of test card numbers on the{' '}
+              Swipe app is a demo app using a Stripe test environment. You can
+              find a list of test card numbers on the{' '}
               <a
                 href="https://stripe.com/docs/testing#cards"
                 target="_blank"
@@ -45,12 +55,12 @@ export default async function BillingPage() {
               .
             </AlertDescription>
           </Alert>
-          {/* <BillingForm
-          subscriptionPlan={{
-            ...subscriptionPlan,
-            isCanceled,
-          }}
-        /> */}
+          <BillingForm
+            subscriptionPlan={{
+              ...subscriptionPlan,
+              isCanceled,
+            }}
+          />
         </div>
       </DashboardShell>
     </ProtectedRoute>

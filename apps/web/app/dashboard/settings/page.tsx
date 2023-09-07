@@ -1,7 +1,7 @@
 import ProtectedRoute from '../../../components/protected-route';
 import { DashboardHeader } from '../../../components/header';
 import { DashboardShell } from '../../../components/shell';
-import { UserNameForm } from '../../../components/user-name-form';
+import { UserNameForm } from '../../../components/forms/user-name-form';
 
 export const metadata = {
   title: 'Settings',
@@ -22,8 +22,8 @@ export default async function SettingsPage() {
           heading="Settings"
           text="Manage account and website settings."
         />
-        <div className="grid gap-10">
-          <UserNameForm user={{ id: 'user.id', name: 'user.name' || '' }} />
+        <div className="flex gap-10 w-full">
+          <UserNameForm className="w-full" />
         </div>
       </DashboardShell>
     </ProtectedRoute>

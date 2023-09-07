@@ -5,7 +5,7 @@ import { Icons } from '../components/icons';
 import { UserState } from '../contexts/main-store';
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<UserState, 'photo' | 'name'>;
+  user: Pick<UserState, 'photo'> & { name: string };
 }
 
 export function UserAvatar({ user, ...props }: UserAvatarProps) {

@@ -16,7 +16,6 @@ import {
   buttonVariants,
 } from '@swipe-app/shared-ui';
 import { UserAvatar } from '../components/user-avatar';
-import { UserState } from '../contexts/main-store';
 import { signOut } from '../lib/session';
 import useMainStoreContext from '../hooks/use-main-store-context';
 import { cn } from '../lib/utils';
@@ -33,18 +32,23 @@ export function UserAccountNav() {
           )}
         >
           <UserAvatar
-            user={{ name: user.name, photo: user.photo }}
+            user={{
+              name: `${user.firstName} ${user.lastName}`,
+              photo: user.photo,
+            }}
             className="h-8 w-8"
           />
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-fit">
         <div className="min-w-36 w-auto grid gap-4">
-          {(user.name || user.email) && (
+          {((user.firstName && user.lastName) || user.email) && (
             <>
               <div className="flex items-center justify-start gap-2 p-2">
                 <div className="flex flex-col space-y-1 leading-none">
-                  {user.name && <p className="font-medium">{user.name}</p>}
+                  {user.firstName && user.lastName && (
+                    <p className="font-medium mb-1">{`${user.firstName} ${user.lastName}`}</p>
+                  )}
                   {user.email && (
                     <p
                       className="truncate text-sm text-muted-foreground"

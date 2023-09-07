@@ -1,7 +1,8 @@
+'use client';
 import * as React from 'react';
 
-import { UserSubscriptionPlan } from '../types';
-import { cn, formatDate } from '../lib/utils';
+import { UserSubscriptionPlan } from '../../types';
+import { cn, formatDate } from '../../lib/utils';
 import { buttonVariants } from '@swipe-app/shared-ui';
 import {
   Card,
@@ -12,7 +13,7 @@ import {
   CardTitle,
 } from '@swipe-app/shared-ui';
 import { toast } from '@swipe-app/shared-ui';
-import { Icons } from '../components/icons';
+import { Icons } from '../icons';
 
 interface BillingFormProps extends React.HTMLAttributes<HTMLFormElement> {
   subscriptionPlan: UserSubscriptionPlan & {
