@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 //   return res;
 // }
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Dashboard',
   description: 'Edit compositions',
 };
