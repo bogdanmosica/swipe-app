@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { readFileSync } from 'fs';
-import { FavoriteAuthor } from '../../../favorite-authors/entities/favorite-author.entity';
+import { FavoriteAuthor } from '../../../composition-settings/favorite-authors/entities/favorite-author.entity';
 import path from 'path';
 
 @Injectable()

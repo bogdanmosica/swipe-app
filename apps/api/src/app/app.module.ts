@@ -7,10 +7,6 @@ import { DevtoolsModule } from '@nestjs/devtools-integration';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FavoriteAuthorsModule } from './favorite-authors/favorite-authors.module';
-import { FavoriteQuotesModule } from './favorite-quotes/favorite-quotes.module';
-import { VideoBackgroundsModule } from './video-backgrounds/video-backgrounds.module';
-import { ColourPalettesModule } from './colour-palettes/colour-palettes.module';
 import { SeedModule } from './database/seed/seed.module';
 import { AdministrationEntitiesModule } from './administration-entities/administration-entities.module';
 import { AuthModule } from './auth/auth.module';
@@ -19,6 +15,7 @@ import { FilesModule } from './files/files.module';
 import { MailModule } from './mail/mail.module';
 import { ForgotModule } from './forgot/forgot.module';
 import { SessionModule } from './session/session.module';
+
 import databaseConfig from './config/database.config';
 import authConfig from './config/auth.config';
 import appConfig from './config/app.config';
@@ -31,6 +28,7 @@ import appleConfig from './config/apple.config';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { AllConfigType } from './config/config.type';
 import { MailerModule } from './mailer/mailer.module';
+import { CompositionSettingsModule } from './composition-settings/composition-settings.module';
 
 @Module({
   imports: [
@@ -85,10 +83,6 @@ import { MailerModule } from './mailer/mailer.module';
       imports: [ConfigModule],
       inject: [ConfigService],
     }),
-    FavoriteAuthorsModule,
-    FavoriteQuotesModule,
-    VideoBackgroundsModule,
-    ColourPalettesModule,
     AdministrationEntitiesModule,
     AuthModule,
     UsersModule,
@@ -102,6 +96,7 @@ import { MailerModule } from './mailer/mailer.module';
     SessionModule,
     MailerModule,
     SeedModule,
+    CompositionSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

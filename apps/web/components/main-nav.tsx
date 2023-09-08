@@ -14,16 +14,18 @@ import useMainStoreContext from '../hooks/use-main-store-context';
 interface MainNavProps {
   items?: MainNavItem[];
   children?: React.ReactNode;
+  backBtn?: React.ReactNode;
   className?: string;
 }
 
-export function MainNav({ className, items, children }: MainNavProps) {
+export function MainNav({ className, items, children, backBtn }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
   const { isUserAuthenticated } = useMainStoreContext();
 
   return (
     <div className={cn('flex gap-6 md:gap-10', className)}>
+      {backBtn ? backBtn : null}
       <Link href="/" className="hidden items-center space-x-2 md:flex">
         <Icons.circleChevronRight />
         <span className="hidden font-bold sm:inline-block">

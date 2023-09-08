@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
 
-import { VideoBackground } from '../../../video-backgrounds/entities/video-background.entity';
+import { VideoBackground } from '../../../composition-settings/video-backgrounds/entities/video-background.entity';
 import path from 'path';
 
 @Injectable()

@@ -7,6 +7,13 @@ export type User = {
   name: string | null;
 };
 
+export type CompositionType = {
+  id: string;
+  title: string;
+  published?: string;
+  createdAt: string;
+};
+
 export type MainFeaturesItem = {
   title: string;
   icon: IconT;

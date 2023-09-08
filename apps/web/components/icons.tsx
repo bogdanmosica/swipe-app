@@ -34,6 +34,7 @@ import {
   FaHatWizard,
   FaCircleChevronRight,
 } from 'react-icons/fa6';
+import { RiMovieFill } from 'react-icons/ri';
 
 export type Icon = LucideIcon;
 
@@ -85,4 +86,5 @@ export const Icons = {
   ),
   twitter: Twitter,
   check: Check,
+  composition: RiMovieFill,
 };

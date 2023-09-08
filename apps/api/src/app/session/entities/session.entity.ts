@@ -1,15 +1,14 @@
 import { Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
-import { EntityHelper } from '../../utils/entity-helper';
+import { UserEntityHelper } from '../../utils/user-entity-helper';
 
+/**
+ * Extends with UserEntityHelper.
+ *
+ * @extended UserEntityHelper - adds a userId column to the table.
+ */
 @Entity()
-export class Session extends EntityHelper {
+export class Session extends UserEntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @ManyToOne(() => User, {
-    eager: true,
-  })
-  @Index()
-  user: User;
 }

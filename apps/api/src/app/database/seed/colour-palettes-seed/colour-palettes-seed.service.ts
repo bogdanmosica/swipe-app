@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { readFileSync } from 'fs';
 import { Repository } from 'typeorm';
 import { NameThatColor } from '../../../utils/name-that-color/name-that-color';
-import { ColourPalette } from '../../../colour-palettes/entities/colour-palette.entity';
+import { ColourPalette } from '../../../composition-settings/colour-palettes/entities/colour-palette.entity';
 import path from 'path';
 
 @Injectable()

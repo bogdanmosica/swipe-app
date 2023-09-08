@@ -6,6 +6,10 @@ export const dashboardConfig: DashboardConfig = {
       title: 'Compositions',
       href: '/dashboard',
     },
+    {
+      title: 'Templates',
+      href: '/templates',
+    },
   ],
   sidebarNav: [
     {
