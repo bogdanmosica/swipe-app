@@ -18,10 +18,19 @@ interface MainNavProps {
   className?: string;
 }
 
-export function MainNav({ className, items, children, backBtn }: MainNavProps) {
+export function MainNav({
+  className,
+  items = [],
+  children,
+  backBtn,
+}: MainNavProps) {
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
   const { isUserAuthenticated } = useMainStoreContext();
+
+  const navItems = items.filter(
+    (item) => !item.needAuth || (item.needAuth && isUserAuthenticated)
+  );
 
   return (
     <div className={cn('flex gap-6 md:gap-10', className)}>
@@ -34,7 +43,7 @@ export function MainNav({ className, items, children, backBtn }: MainNavProps) {
       </Link>
       {items?.length ? (
         <nav className="hidden gap-6 md:flex">
-          {items?.map((item, index) => (
+          {navItems?.map((item, index) => (
             <Link
               key={index}
               href={item.disabled ? '#' : item.href}
@@ -43,8 +52,7 @@ export function MainNav({ className, items, children, backBtn }: MainNavProps) {
                 item.href.startsWith(`/${segment}`)
                   ? 'text-foreground'
                   : 'text-foreground/60',
-                item.disabled && 'cursor-not-allowed opacity-80',
-                item.needAuth && !isUserAuthenticated && 'hidden'
+                item.disabled && 'cursor-not-allowed opacity-80'
               )}
             >
               {item.title}
@@ -60,7 +68,7 @@ export function MainNav({ className, items, children, backBtn }: MainNavProps) {
         <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
+        <MobileNav items={navItems}>{children}</MobileNav>
       )}
     </div>
   );

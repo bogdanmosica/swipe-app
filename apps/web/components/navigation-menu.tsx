@@ -6,42 +6,43 @@ import EditTextOptions from './edit-text-options';
 import NavigationMenuItem from './navigation-menu-item';
 import { cn } from '@swipe-app/shared-ui';
 
-import styles from './navigation-menu.module.css';
-
 /* eslint-disable-next-line */
-export interface NavigationMenuProps {}
+export interface NavigationMenuProps {
+  className?: string;
+}
 
-export function NavigationMenu(props: NavigationMenuProps) {
+export function NavigationMenu({ className }: NavigationMenuProps) {
   return (
     <div
-      className={`w-full absolute border-t-2 border-b-2 border-black border-b-gray-400 bottom-6 flex items-center justify-between ${
-        styles['container'] || ''
-      }`}
+      className={cn(
+        className,
+        'w-full border-t-2 border-b-2 border-black border-b-gray-400 bottom-6 flex items-center justify-between'
+      )}
     >
       <NavigationMenuItem
         className="mr-3 p-9"
-        triggerButton={'Text'}
+        //triggerButton={'Text'}
         iconButton={<FaFont />}
       >
         <EditTextOptions />
       </NavigationMenuItem>
       <NavigationMenuItem
         className="mr-3 p-9"
-        triggerButton={'Color'}
+        //triggerButton={'Color'}
         iconButton={<FaPalette />}
       >
         <ColourPalettesOptions />
       </NavigationMenuItem>
       <NavigationMenuItem
         className="mr-3 p-9"
-        triggerButton={'Audio'}
+        //triggerButton={'Audio'}
         iconButton={<FaItunesNote />}
       >
         <AudioOptions />
       </NavigationMenuItem>
       <NavigationMenuItem
         className="mr-3 p-9"
-        triggerButton={'Background'}
+        //triggerButton={'Background'}
         iconButton={<FaPhotoFilm />}
       >
         <BackgroundOptions />

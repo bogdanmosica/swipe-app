@@ -1,18 +1,12 @@
 'use client';
-//import { RemotionCompositionStudio } from '@swipe-app/remotion-composition-studio';
+import { RemotionCompositionStudio } from '@swipe-app/remotion-composition-studio';
 /* eslint-disable-next-line */
 export interface PlayerNavContainerProps {}
 
 export function PlayerNavContainer(props: PlayerNavContainerProps) {
   return (
-    <div>
-      Welcome to Player Nav
-      {/* <RemotionCompositionStudio
-        durationInFrames={120}
-        compositionWidth={1920}
-        compositionHeight={1080}
-        fps={30}
-      /> */}
+    <div className="max-w-[468px] w-full my-0 mx-auto">
+      <RemotionCompositionStudio />
     </div>
   );
 }

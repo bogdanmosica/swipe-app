@@ -13,7 +13,7 @@ export interface NavigationMenuItemProps {
 
 export function NavigationMenuItem({
   children,
-  triggerButton = 'Popover',
+  triggerButton = '',
   iconButton,
   className,
 }: NavigationMenuItemProps) {
@@ -22,7 +22,7 @@ export function NavigationMenuItem({
       <PopoverTrigger asChild className={cn('w-1/6', className)}>
         <Button size="default" variant="default" className="flex-col">
           {Boolean(iconButton) && iconButton}
-          {triggerButton}
+          {Boolean(triggerButton) && triggerButton}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full" side={'top'}>
