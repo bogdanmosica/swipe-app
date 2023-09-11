@@ -18,16 +18,17 @@ const getCookie = async (name: string) => {
 };
 async function getUserCompositions() {
   const cookie = await getCookie('token');
-  console.log({ cookies: cookies().getAll(), cookie });
+  console.error({ cookies: cookies().getAll(), cookie });
   const res = await axios
     .get<CompositionType[]>(`${SWIPE_BACKEND_URL}/abstract-compositions`, {
       headers: {
-        Cookie: `token=${cookie};`,
+        Cookie: cookies().toString(),
       },
       withCredentials: true,
     })
     .then((response) => response.data)
     .catch((error) => {
+      console.error({ cookies: cookies().getAll(), cookie });
       console.error(error);
       return null;
     });
