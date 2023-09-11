@@ -112,10 +112,14 @@ export class AuthService {
     response.cookie('refreshToken', refreshToken, {
       expires: new Date(tokenExpires),
       httpOnly: true,
+      sameSite: 'none',
+      secure: true,
     });
     response.cookie('token', token, {
       expires: new Date(tokenExpires),
       httpOnly: true,
+      sameSite: 'none',
+      secure: true,
     });
 
     return {

@@ -162,6 +162,7 @@
     "reflect-metadata": "^0.1.13",
     "remotion": "^4.0.18",
     "rxjs": "^7.8.0",
+    "server-only": "^0.0.1",
     "stripe": "^13.2.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",

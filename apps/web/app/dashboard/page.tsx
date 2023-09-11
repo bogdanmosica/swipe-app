@@ -1,3 +1,5 @@
+//'use server';
+import 'server-only';
 import { Metadata } from 'next';
 
 import ProtectedRoute from '../../components/protected-route';
