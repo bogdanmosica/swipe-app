@@ -16,12 +16,13 @@ const getCookie = async (name: string) => {
 };
 async function getUserCompositions() {
   const cookie = await getCookie('token');
+  console.log({ cookies: cookies().getAll(), cookie });
   const res = await axios
     .get<CompositionType[]>(`${SWIPE_BACKEND_URL}/abstract-compositions`, {
-      withCredentials: true,
       headers: {
         Cookie: `token=${cookie};`,
       },
+      withCredentials: true,
     })
     .then((response) => response.data)
     .catch((error) => {
