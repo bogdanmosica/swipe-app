@@ -97,7 +97,7 @@ export function RegisterUserAuthForm({
             </Label>
             <Input
               id="password"
-              placeholder=""
+              placeholder="Password"
               type="password"
               autoCapitalize="none"
               autoComplete="password"
@@ -115,7 +115,7 @@ export function RegisterUserAuthForm({
             </Label>
             <Input
               id="confirmPassword"
-              placeholder=""
+              placeholder="Repeat Password"
               type="password"
               autoCapitalize="none"
               autoComplete="password"
