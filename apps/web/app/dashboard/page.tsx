@@ -22,7 +22,7 @@ async function getUserCompositions() {
   const res = await axios
     .get<CompositionType[]>(`${SWIPE_BACKEND_URL}/abstract-compositions`, {
       headers: {
-        Cookie: cookies().toString(),
+        cookie: cookies().toString(),
       },
       withCredentials: true,
     })
