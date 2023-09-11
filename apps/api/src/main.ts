@@ -21,7 +21,6 @@ async function bootstrap() {
       allowedHeaders: ['Content-Type'],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       credentials: true,
-      exposedHeaders: ['set-cookie'],
     },
     snapshot: true,
   });

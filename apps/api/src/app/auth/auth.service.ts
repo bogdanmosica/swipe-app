@@ -114,14 +114,12 @@ export class AuthService {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      domain: '.bogdanmosica.ro',
     });
     response.cookie('token', token, {
       expires: new Date(tokenExpires),
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      domain: '.bogdanmosica.ro',
     });
 
     return {
