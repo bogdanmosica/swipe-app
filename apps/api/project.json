@@ -75,7 +75,12 @@
         "assets": [
           "apps/api/src/assets",
           "apps/api/src/assets/mail-templates",
-          "apps/api/src/assets/i18n"
+          "apps/api/src/assets/i18n",
+          {
+            "input": "libs/remotion-composition-studio/src/lib",
+            "glob": "**/*",
+            "output": "apps/remotion-composition-studio"
+          }
         ],
         "isolatedConfig": true,
         "webpackConfig": "apps/api/webpack.config.js"

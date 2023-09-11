@@ -24,7 +24,10 @@ async function getUserCompositions() {
       },
     })
     .then((response) => response.data)
-    .catch((error) => []);
+    .catch((error) => {
+      console.error(error);
+      throw new Error(error);
+    });
   return res;
 }
 

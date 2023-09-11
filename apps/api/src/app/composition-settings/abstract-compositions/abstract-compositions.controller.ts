@@ -44,6 +44,11 @@ export class AbstractCompositionsController {
     return this.abstractCompositionsService.findAllWhere(request.user);
   }
 
+  @Get('composition-templates')
+  findCompositionTemplates() {
+    return this.abstractCompositionsService.findCompositionTemplates();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.abstractCompositionsService.findOne({ id: +id });

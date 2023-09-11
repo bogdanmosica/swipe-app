@@ -6,13 +6,19 @@ import {
   Repository,
 } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { bundle } from '@remotion/bundler';
+import {
+  getCompositions,
+  renderMedia,
+  selectComposition,
+} from '@remotion/renderer';
+import path from 'path';
 
 import { CreateAbstractCompositionDto } from './dto/create-abstract-composition.dto';
 import { AbstractComposition } from './entities/abstract-composition.entity';
 import { EntityCondition, NullableType } from '../../utils/types';
 import { IPaginationOptions } from '../../utils/interfaces/pagination-options.interface';
 import { JwtPayloadType } from '../../auth/strategies/types/jwt-payload.type';
-import { User } from '../../users/entities/user.entity';
 
 @Injectable()
 export class AbstractCompositionsService {
@@ -79,5 +85,19 @@ export class AbstractCompositionsService {
 
   async remove(id: AbstractComposition['id']): Promise<void> {
     await this.repository.delete(id);
+  }
+
+  async findCompositionTemplates() {
+    const bundleLocation = await bundle({
+      entryPoint: path.join(
+        __dirname,
+        'apps/remotion-composition-studio/index.ts'
+      ),
+      // If you have a Webpack override, make sure to add it here
+      webpackOverride: (config) => config,
+    });
+
+    const compositions = await getCompositions(bundleLocation, {});
+    return compositions;
   }
 }

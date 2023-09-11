@@ -11,7 +11,10 @@
     "build:api:prod": "nx build --project=api",
     "start:api:prod": "nx serve --project=api --configuration=production",
     "start:api-dashboard:dev": "npx nx run api-dashboard:serve --configuration=development",
+    "build:web:dev": "npx nx run web:build --configuration=development",
     "start:web:dev": "npx nx run web:serve --configuration=development",
+    "build:web:prod": "nx build --project=web",
+    "start:web:prod": "nx serve --project=web --configuration=production",
     "remotion:studio": "npx remotion studio -P apps/web/tsconfig.json --config=apps/web/remotion.config.ts --log=verbose",
     "dep-graph": "nx dep-graph",
     "run:web:dev": "cross-env PORT=4400 NODE_OPTIONS='--inspect' npx nx run web:serve --configuration=development"
@@ -88,6 +91,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/swagger": "^7.1.8",
     "@nestjs/typeorm": "^10.0.0",
+    "@nx/vite": "^16.8.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-aspect-ratio": "^1.0.3",

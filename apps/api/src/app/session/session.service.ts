@@ -37,7 +37,7 @@ export class SessionService {
         user: data.user.id,
       },
     } as FindOneOptions<Session>);
-    //debugger;
+
     if (userSession) return userSession;
     return this.sessionRepository.save(this.sessionRepository.create(data));
   }
